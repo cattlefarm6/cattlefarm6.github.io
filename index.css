@@ -56,12 +56,16 @@
   right: 0;
 }
 
+ .u-section-2-1 {
+  filter: none;
+}
+
 .u-section-2-1 .u-sheet-1 {
-  min-height: 313px;
+  min-height: 50vh;
 }
 
 .u-section-2-1 .u-text-1 {
-  margin: 61px 32px 0;
+  margin: 61px -18px 0 32px;
 }
 
 .u-section-2-1 .u-btn-1 {
@@ -70,20 +74,6 @@
   text-transform: uppercase;
   font-weight: 700;
   margin: 41px auto 60px;
-}
-
-@media (max-width: 991px) {
-  .u-section-2-1 .u-text-1 {
-    width: auto;
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-
-@media (max-width: 767px) {
-  .u-section-2-1 .u-text-1 {
-    margin-top: 60px;
-  }
 }
 
 .u-section-2-2 .u-sheet-1 {

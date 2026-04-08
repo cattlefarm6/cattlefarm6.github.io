@@ -99,3 +99,30 @@
     width: 340px;
   }
 }
+<style>
+.copy-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #478ac9; /* Твой основной синий цвет */
+    color: #ffffff !important;
+    border-radius: 5px;        /* Скругление углов */
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease; /* Плавная анимация */
+    user-select: none;         /* Чтобы текст не выделялся синим при клике */
+    text-decoration: none;
+}
+
+/* Эффект при наведении */
+.copy-button:hover {
+    background-color: #366999; /* Темнее при наведении */
+    transform: translateY(-2px); /* Легкий подъем вверх */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Эффект при нажатии */
+.copy-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+</style>

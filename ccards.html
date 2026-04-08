@@ -12,7 +12,7 @@
     <meta name="generator" content="Nicepage 8.4.14, nicepage.com">
     
     
-    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Roboto:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;family=Oswald:wght@200;300;400;500;600;700">
+<link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Roboto:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;family=Oswald:wght@200;300;400;500;600;700">
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
@@ -68,7 +68,39 @@
               <div class="u-container-layout u-container-layout-1">
                 <div class="fr-view u-clearfix u-rich-text u-text">
                   <p><div class="fr-view u-clearfix u-rich-text u-text">
-  <p class="copy-text" style="cursor: pointer;">Содержание примера 1</p>
+  <style>
+    .my-copy-button-full {
+      display: block;          /* Делает блок "блочным", чтобы он занял всю строку */
+      width: 100%;             /* Растягивает на всю ширину */
+      box-sizing: border-box;  /* Чтобы внутренние отступы не раздували кнопку за края */
+      padding: 15px 24px;      /* Сделал чуть выше для солидности */
+      background-color: #478ac9;
+      color: white !important;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: sans-serif;
+      font-weight: bold;
+      text-align: center;      /* Текст строго по центру */
+      transition: all 0.2s;
+      user-select: none;
+      border: none;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin: 10px 0;
+    }
+    
+    .my-copy-button-full:hover {
+      background-color: #357abd;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    .my-copy-button-full.copied {
+      background-color: #2ecc71 !important;
+    }
+  </style>
+
+  <div class="my-copy-button-full copy-action" data-copy="ТО ЧТО КОПИРУЕМ">
+    Текст на кнопке (на всю ширину)
+  </div>
 </div></p>
                 </div>
               </div>
@@ -81,8 +113,8 @@
             <div class="u-accordion-pane u-container-style u-accordion-pane-2" id="accordion-4aab" aria-labelledby="link-accordion-4aab" role="tabpanel">
               <div class="u-container-layout u-container-layout-2">
                 <div class="fr-view u-clearfix u-rich-text u-text">
-                  <p><div class="fr-view u-clearfix u-rich-text u-text">
-  <p class="copy-text" style="cursor: pointer;">Содержание примера 2</p>
+                  <p><div class="my-copy-button copy-action" data-copy="Тут очень длинная ссылка">
+   Скачать конфиг
 </div></p>
                 </div>
               </div>
@@ -95,9 +127,9 @@
             <div class="u-accordion-pane u-container-style u-accordion-pane-3" id="accordion-eb1f" aria-labelledby="link-accordion-eb1f" role="tabpanel">
               <div class="u-container-layout u-container-layout-3">
                 <div class="fr-view u-clearfix u-rich-text u-text">
-                  <p><div class="fr-view u-clearfix u-rich-text u-text">
-  <p class="copy-text" style="cursor: pointer;">Содержание примера 3</p>
-</div></p>
+                  <p><div class="my-copy-button copy-action" data-copy="Тут очень дл1инная ссылка">
+   Скачать конфи1г
+</div>/p>
                 </div>
               </div>
             </div>
@@ -116,23 +148,25 @@
 
 	  <script>
 document.addEventListener('click', function(e) {
-  // Проверяем, что кликнули по элементу с классом copy-text
-  if (e.target.classList.contains('copy-text')) {
-    const textToCopy = e.target.innerText;
+  // Ищем клик по кнопке с классом copy-action
+  if (e.target.classList.contains('copy-action')) {
+    const btn = e.target;
+    
+    // Берем текст именно из атрибута data-copy
+    const textToCopy = btn.getAttribute('data-copy');
+    const originalBtnText = btn.innerText;
 
     navigator.clipboard.writeText(textToCopy).then(() => {
-      // Визуальный эффект: текст на секунду станет серым, чтобы было понятно, что клик сработал
-      const originalColor = e.target.style.color;
-      e.target.style.color = '#478ac9'; // Цвет темы из твоего мета-тега
-      
-      alert('Текст скопирован: ' + textToCopy); // Можно убрать, если уведомление не нужно
+      // Визуальный фидбек
+      btn.innerText = 'Скопировано! ✅';
+      btn.classList.add('copied');
       
       setTimeout(() => {
-        e.target.style.color = originalColor;
-      }, 200);
+        btn.innerText = originalBtnText;
+        btn.classList.remove('copied');
+      }, 1500);
     });
   }
 });
 </script>
 </body></html>
-    

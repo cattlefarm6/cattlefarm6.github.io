@@ -68,33 +68,40 @@
             <div class="u-accordion-active u-accordion-pane u-container-style u-accordion-pane-1" id="accordion-6327" aria-labelledby="link-accordion-6327" role="tabpanel">
               <div class="u-container-layout u-container-layout-1">
                 <div class="fr-view u-clearfix u-rich-text u-text">
-                  <p><div class="fr-view u-clearfix u-rich-text u-text" style="text-align: center;">
+                  <p><div class="fr-view u-clearfix u-rich-text u-text">
   <style>
-    .my-copy-button {
-      display: inline-block;
-      padding: 12px 24px;
-      background-color: #478ac9; /* Синий цвет */
+    .my-copy-button-full {
+      display: block;          /* Делает блок "блочным", чтобы он занял всю строку */
+      width: 100%;             /* Растягивает на всю ширину */
+      box-sizing: border-box;  /* Чтобы внутренние отступы не раздували кнопку за края */
+      padding: 15px 24px;      /* Сделал чуть выше для солидности */
+      background-color: #478ac9;
       color: white !important;
       border-radius: 8px;
       cursor: pointer;
       font-family: sans-serif;
       font-weight: bold;
-      transition: background 0.3s, transform 0.1s;
+      text-align: center;      /* Текст строго по центру */
+      transition: all 0.2s;
       user-select: none;
       border: none;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       margin: 10px 0;
     }
-    .my-copy-button:hover {
+    
+    .my-copy-button-full:hover {
       background-color: #357abd;
-      transform: translateY(-1px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
-    .my-copy-button:active {
-      transform: translateY(1px);
+    
+    .my-copy-button-full.copied {
+      background-color: #2ecc71 !important;
     }
   </style>
 
-  <div class="my-copy-button copy-text">Содержание примера 1</div>
+  <div class="my-copy-button-full copy-action" data-copy="ТО ЧТО КОПИРУЕМ">
+    Текст на кнопке (на всю ширину)
+  </div>
 </div></p>
                 </div>
               </div>
@@ -107,8 +114,8 @@
             <div class="u-accordion-pane u-container-style u-accordion-pane-2" id="accordion-4aab" aria-labelledby="link-accordion-4aab" role="tabpanel">
               <div class="u-container-layout u-container-layout-2">
                 <div class="fr-view u-clearfix u-rich-text u-text">
-                  <p><div class="fr-view u-clearfix u-rich-text u-text">
-  <p class="copy-text" style="cursor: pointer;">Содержание примера 2</p>
+                  <p><div class="my-copy-button copy-action" data-copy="Тут очень длинная ссылка">
+   Скачать конфиг
 </div></p>
                 </div>
               </div>
@@ -121,9 +128,9 @@
             <div class="u-accordion-pane u-container-style u-accordion-pane-3" id="accordion-eb1f" aria-labelledby="link-accordion-eb1f" role="tabpanel">
               <div class="u-container-layout u-container-layout-3">
                 <div class="fr-view u-clearfix u-rich-text u-text">
-                  <p><div class="fr-view u-clearfix u-rich-text u-text">
-  <p class="copy-text" style="cursor: pointer;">Содержание примера 3</p>
-</div></p>
+                  <p><div class="my-copy-button copy-action" data-copy="Тут очень дл1инная ссылка">
+   Скачать конфи1г
+</div>/p>
                 </div>
               </div>
             </div>
@@ -142,18 +149,22 @@
 
 	  <script>
 document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('copy-text')) {
+  // Ищем клик по кнопке с классом copy-action
+  if (e.target.classList.contains('copy-action')) {
     const btn = e.target;
-    const originalText = btn.innerText;
+    
+    // Берем текст именно из атрибута data-copy
+    const textToCopy = btn.getAttribute('data-copy');
+    const originalBtnText = btn.innerText;
 
-    navigator.clipboard.writeText(originalText).then(() => {
-      // Меняем текст кнопки для уведомления
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      // Визуальный фидбек
       btn.innerText = 'Скопировано! ✅';
-      btn.style.backgroundColor = '#2ecc71'; // Зеленый цвет успеха
+      btn.classList.add('copied');
       
       setTimeout(() => {
-        btn.innerText = originalText;
-        btn.style.backgroundColor = ''; // Возвращаем исходный цвет из CSS
+        btn.innerText = originalBtnText;
+        btn.classList.remove('copied');
       }, 1500);
     });
   }

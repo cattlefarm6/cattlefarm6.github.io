@@ -68,10 +68,33 @@
             <div class="u-accordion-active u-accordion-pane u-container-style u-accordion-pane-1" id="accordion-6327" aria-labelledby="link-accordion-6327" role="tabpanel">
               <div class="u-container-layout u-container-layout-1">
                 <div class="fr-view u-clearfix u-rich-text u-text">
-                  <p><div class="fr-view u-clearfix u-rich-text u-text">
-  <div style="text-align: center; margin-top: 10px;">
-    <span class="copy-button copy-text">Содержание примера 1</span>
-  </div>
+                  <p><div class="fr-view u-clearfix u-rich-text u-text" style="text-align: center;">
+  <style>
+    .my-copy-button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #478ac9; /* Синий цвет */
+      color: white !important;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: sans-serif;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.1s;
+      user-select: none;
+      border: none;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin: 10px 0;
+    }
+    .my-copy-button:hover {
+      background-color: #357abd;
+      transform: translateY(-1px);
+    }
+    .my-copy-button:active {
+      transform: translateY(1px);
+    }
+  </style>
+
+  <div class="my-copy-button copy-text">Содержание примера 1</div>
 </div></p>
                 </div>
               </div>

@@ -119,20 +119,19 @@
 
 	  <script>
 document.addEventListener('click', function(e) {
-  // Проверяем, что кликнули по элементу с классом copy-text
   if (e.target.classList.contains('copy-text')) {
-    const textToCopy = e.target.innerText;
+    const btn = e.target;
+    const originalText = btn.innerText;
 
-    navigator.clipboard.writeText(textToCopy).then(() => {
-      // Визуальный эффект: текст на секунду станет серым, чтобы было понятно, что клик сработал
-      const originalColor = e.target.style.color;
-      e.target.style.color = '#478ac9'; // Цвет темы из твоего мета-тега
-      
-      alert('Текст скопирован: ' + textToCopy); // Можно убрать, если уведомление не нужно
+    navigator.clipboard.writeText(originalText).then(() => {
+      // Меняем текст кнопки для уведомления
+      btn.innerText = 'Скопировано! ✅';
+      btn.style.backgroundColor = '#2ecc71'; // Зеленый цвет успеха
       
       setTimeout(() => {
-        e.target.style.color = originalColor;
-      }, 200);
+        btn.innerText = originalText;
+        btn.style.backgroundColor = ''; // Возвращаем исходный цвет из CSS
+      }, 1500);
     });
   }
 });

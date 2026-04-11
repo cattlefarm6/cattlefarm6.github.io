@@ -74,3 +74,69 @@
 <body>
 
 <header>
+    <div class="logo">Desolation <strong>Project</strong></div>
+    <nav>
+        <a href="./">Главная</a>
+        <a href="cassie.html">C.A.S.S.I.E.</a>
+        <a href="ccards.html">CCards</a>
+    </nav>
+</header>
+
+<section class="main-section">
+    <h1>CCards</h1>
+    <p class="subtitle">Примеры конфигураций</p>
+
+    <div class="accordion-container">
+
+        <details open>
+            <summary>Карта Уровня 1</summary>
+            <div class="button-wrapper">
+                <button class="copy-btn btn-blue" data-payload="КОД_ПЕРВОЙ_КНОПКИ">
+                    Скачать Конфиг
+                </button>
+                <button class="copy-btn btn-dark" data-payload="КОД_ВТОРОЙ_КНОПКИ">
+                    Копировать JSON
+                </button>
+            </div>
+        </details>
+
+        <details>
+            <summary>Карта Уровня 2</summary>
+            <div class="button-wrapper">
+                <button class="copy-btn btn-blue" data-payload="ДАННЫЕ_А">
+                    Конфиг (Вариант А)
+                </button>
+                <button class="copy-btn btn-dark" data-payload="ДАННЫЕ_Б">
+                    Конфиг (Вариант Б)
+                </button>
+            </div>
+        </details>
+
+    </div>
+</section>
+
+<footer>
+    <p>Desolation Project<br>Все права не защищены</p>
+</footer>
+
+<script>
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('copy-btn')) {
+            const button = e.target;
+            const textToCopy = button.getAttribute('data-payload');
+            const originalLabel = button.innerText;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                button.innerText = 'Скопировано! ✅';
+                button.classList.add('success');
+                setTimeout(() => {
+                    button.innerText = originalLabel;
+                    button.classList.remove('success');
+                }, 1500);
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -3,217 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CCards | Desolation Project</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>CCards | Dark Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* БАЗОВЫЕ СТИЛИ (Чтобы всё не развалилось) */
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-            color: #111;
+        /* ОСНОВНОЙ ФОН */
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            margin: 0; 
+            background: #0d0d0d; /* Глубокий черный */
+            color: #eeeeee; 
         }
 
-        /* ШАПКА И НАВИГАЦИЯ */
-        header {
-            padding: 20px 5%;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.5rem;
-            text-transform: uppercase;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #478ac9;
-            margin-left: 20px;
-            font-weight: 500;
-        }
-
-        /* ОСНОВНОЙ КОНТЕНТ */
-        .main-section {
-            max-width: 900px;
-            margin: 60px auto;
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
             padding: 0 20px;
-            text-align: center;
         }
 
-        h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 3rem;
+        h1 { 
+            font-family: 'Oswald', sans-serif; 
+            font-size: 3.5rem; 
+            letter-spacing: 4px;
+            margin-bottom: 5px;
             text-transform: uppercase;
-            margin-bottom: 10px;
         }
 
-        .subtitle {
-            font-style: italic;
-            color: #666;
+        .instruction {
+            color: #888;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
             margin-bottom: 40px;
+            border-left: 2px solid #ff9500; /* Оранжевая полоска слева */
+            padding-left: 15px;
         }
 
-        /* СТИЛЬ АККОРДЕОНА (Удобно для правок) */
-        .accordion-container {
-            text-align: left;
-            border-top: 1px solid #eaeaea;
+        /* ТОТ САМЫЙ ОБЩИЙ БЛОК (КАРТОЧКА) */
+        .main-card {
+            background: #161616; /* Чуть светлее фона */
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        details {
-            border-bottom: 1px solid #eaeaea;
-            transition: all 0.3s ease;
+        .card-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* СПИСКИ (АККОРДЕОНЫ) */
+        .accordion-item {
+            background: #1f1f1f; /* Цвет плашки */
+            margin-bottom: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .accordion-item:hover {
+            background: #252525;
         }
 
         summary {
-            padding: 20px;
+            padding: 18px 25px;
             font-weight: 700;
             cursor: pointer;
             list-style: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: #ff9500; /* Оранжевый текст заголовков */
+            text-transform: uppercase;
+            letter-spacing: 1px;
             outline: none;
         }
 
-        summary::-webkit-details-marker { display: none; } /* Убираем стандартную стрелку в Safari */
-
+        /* Иконка стрелочки справа */
         summary::after {
-            content: '+';
-            font-size: 1.5rem;
-            color: #478ac9;
+            content: '▼';
+            font-size: 0.7rem;
+            color: #555;
+            transition: 0.3s;
         }
 
         details[open] summary::after {
-            content: '−';
+            transform: rotate(180deg);
         }
 
-        .details-content {
-            padding: 0 20px 25px 20px;
-            animation: slideDown 0.3s ease-out;
+        /* КОНТЕНТ ВНУТРИ */
+        .button-group {
+            display: flex;
+            gap: 10px;
+            padding: 0 25px 20px 25px;
         }
 
-        /* КНОПКА КОПИРОВАНИЯ */
         .copy-btn {
-            display: block;
-            width: 100%;
-            padding: 18px;
-            background-color: #478ac9;
-            color: #fff !important;
+            flex: 1;
+            padding: 12px;
             border: none;
-            border-radius: 6px;
-            font-size: 1rem;
+            border-radius: 4px;
             font-weight: 700;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            font-size: 0.8rem;
         }
 
-        .copy-btn:hover { background-color: #357abd; }
-        .copy-btn:active { transform: scale(0.98); }
-        .copy-btn.success { background-color: #2ecc71 !important; }
+        .btn-primary { background: #ff9500; color: #000; }
+        .btn-primary:hover { background: #ffaa33; }
 
-        /* ПОДВАЛ */
-        footer {
-            background: #333;
-            color: #ccc;
-            padding: 40px 20px;
-            text-align: center;
-            margin-top: 100px;
-        }
+        .btn-secondary { background: #333; color: #fff; }
+        .btn-secondary:hover { background: #444; }
 
-        /* АНИМАЦИЯ ОТКРЫТИЯ */
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .copy-btn.success { background: #2ecc71 !important; color: #fff; }
 
-        /* МОБИЛЬНАЯ ВЕРСИЯ */
+        /* Адаптив */
         @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            header { flex-direction: column; gap: 15px; }
-            nav a { margin: 0 10px; font-size: 0.9rem; }
+            .main-card { padding: 20px; }
+            .button-group { flex-direction: column; }
+            h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">Desolation <strong>Project</strong></div>
-    <nav>
-        <a href="./">Главная</a>
-        <a href="cassie.html">C.A.S.S.I.E.</a>
-        <a href="cinfo.html">Cinfo</a>
-        <a href="ccards.html">CCards</a>
-    </nav>
-</header>
+<div class="container">
+    <h1>CCARDS</h1>
+    <div class="instruction">Используйте кнопки внутри списков для копирования конфигураций</div>
 
-<section class="main-section">
-    <h1>CCards</h1>
-    <p class="subtitle">Кастомные Ключ Карты</p>
-    <p class="subtitle">Нажмите на кнопку что-бы скопировать</p>
+    <div class="main-card">
+        <div class="card-title">APHIN</div>
 
-    <div class="accordion-container">
-
-        <details>
-            <summary>Пример 1: Стандартная карта</summary>
-            <div class="details-content">
-                <button class="copy-btn" data-payload="КОД_ДЛЯ_БУФЕРА_1">
-                    Копировать конфиг карты
-                </button>
-                
-                <button class="copy-btn" data-payload="КОД_ДЛЯ_БУФЕРА_1">
-                    Ещё
-                </button>
-            </div>
-        </details>
-        <details>
-            <summary>Пример 2: Научный сотрудник</summary>
-            <div class="details-content">
-                <button class="copy-btn" data-payload="КОД_ДЛЯ_БУФЕРА_2">
-                    Копировать конфиг карты
-                </button>
+        <details class="accordion-item">
+            <summary>Служба безопасности</summary>
+            <div class="button-group">
+                <button class="copy-btn btn-primary" data-payload="CODE_SEC_1">Вариант 1</button>
+                <button class="copy-btn btn-secondary" data-payload="CODE_SEC_2">Вариант 2</button>
             </div>
         </details>
 
-        <details>
-            <summary>Пример 3: СБ</summary>
-            <div class="details-content">
-                <button class="copy-btn" data-payload="КОД_ДЛЯ_БУФЕРА_3">
-                    Копировать конфиг карты
-                </button>
+        <details class="accordion-item">
+            <summary>Научная служба и руководство</summary>
+            <div class="button-group">
+                <button class="copy-btn btn-primary" data-payload="CODE_SCI_1">Конфиг</button>
+                <button class="copy-btn btn-secondary" data-payload="CODE_SCI_2">JSON</button>
+            </div>
+        </details>
+
+        <details class="accordion-item">
+            <summary>Персонал фонда и класс D</summary>
+            <div class="button-group">
+                <button class="copy-btn btn-primary" data-payload="CODE_D_1">Класс D</button>
+                <button class="copy-btn btn-secondary" data-payload="CODE_D_2">Персонал</button>
             </div>
         </details>
 
     </div>
-</section>
-
-<footer>
-    <p>Desolation Project<br>Все права не защищены</p>
-</footer>
+    </div>
 
 <script>
-    // Скрипт сам найдет все кнопки с классом copy-btn
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('copy-btn')) {
-            const button = e.target;
-            const textToCopy = button.getAttribute('data-payload');
-            const originalLabel = button.innerText;
+            const btn = e.target;
+            const text = btn.getAttribute('data-payload');
+            const originalText = btn.innerText;
 
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                button.innerText = 'Скопировано! ✅';
-                button.classList.add('success');
-                
+            navigator.clipboard.writeText(text).then(() => {
+                btn.innerText = 'Скопировано!';
+                btn.classList.add('success');
                 setTimeout(() => {
-                    button.innerText = originalLabel;
-                    button.classList.remove('success');
-                }, 2000);
+                    btn.innerText = originalText;
+                    btn.classList.remove('success');
+                }, 1500);
             });
         }
     });

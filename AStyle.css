@@ -39,44 +39,64 @@ body {
 
 /* --- 3. ШАПКА И НАВИГАЦИЯ --- */
 header {
-    padding: 20px 5%;
+    padding: 0 5%; /* Убираем вертикальный padding здесь */
     background-color: var(--bg-card);
     border-bottom: 1px solid #222;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.logo { 
-    font-family: var(--font-heading); 
-    font-size: 1.5rem; 
-    text-transform: uppercase; 
-    color: #fff;
-    letter-spacing: 1px;
-}
-
-.logo strong { 
-    color: var(--accent); 
+    height: 60px; /* Фиксируем высоту шапки для стабильности */
 }
 
 nav {
     display: flex;
-    gap: 20px;
+    gap: 0; /* Убираем gap, заменим его на padding у ссылок для точности */
+    height: 100%; /* Навигация занимает всю высоту шапки */
 }
 
 nav a { 
+    position: relative; /* Нужно для привязки линии */
     text-decoration: none; 
     color: #aaa; 
     font-weight: 500; 
     text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 1px;
+    padding: 0 15px; /* Отступы по бокам */
+    height: 60px; /* Высота совпадает с header */
+    display: flex;
+    align-items: center; /* Центрируем текст по вертикали */
     transition: color 0.2s ease; 
 }
 
-nav a:hover, 
+/* Линия под текстом */
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Линия ровно на границе border-bottom шапки */
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff; /* Белая линия при наведении */
+    transition: width 0.3s ease;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+nav a:hover::after {
+    width: 100%; /* Линия выезжает на всю ширину */
+}
+
+/* Состояние активной страницы */
 nav a.active { 
     color: var(--accent); 
+}
+
+nav a.active::after {
+    width: 100%;
+    background-color: var(--accent); /* Линия активной страницы цветом акцента */
 }
 
 /* --- 4. ОСНОВНАЯ СЕТКА И ЗАГОЛОВКИ --- */

@@ -3,10 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Инструкции | Desolation Project</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Конструктор Карт | Desolation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="AStyle.css">
-    
+    <style>
+        /* Специфичные стили для конструктора */
+        .constructor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            background: #0d1117;
+            border: 1px solid #2d3545;
+            border-radius: 6px;
+            color: #fff;
+            font-family: var(--font-body);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        select:focus, input:focus {
+            border-color: var(--accent);
+        }
+
+        .result-box {
+            background: #000;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--accent);
+            position: sticky;
+            top: 20px;
+        }
+
+        #command-output {
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            color: var(--success);
+            font-size: 1rem;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .constructor-container { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
@@ -14,210 +73,102 @@
     <div class="logo">Desolation <strong>Project</strong></div>
     <nav>
         <a href="index.html">Главная</a>
-        <a href="cassie.html">C.A.S.S.I.E.</a>
-        <a href="cinfo.html">Cinfo</a>
-        <a href="ccards.html">CCards</a>
-        <a href="guides.html" class="active">Guides</a>
+        <a href="guides.html">Guides</a>
+        <a href="constructor.html" class="active">Constructor</a>
     </nav>
 </header>
 
 <div class="container">
-    <h1>База Знаний</h1>
-    <div class="instruction">Справочник по системам сервера и командам для ивент-мастеров</div>
+    <h1>Конструктор Карт</h1>
+    <div class="instruction">Генератор команд для кастомных ключ-карт</div>
 
-    <div class="main-card">
-        <div class="card-title">// СИСТЕМА ОПОВЕЩЕНИЙ C.A.S.S.I.E.</div>
-        
-        <details class="accordion-item">
-            <summary>Базовое использование</summary>
-            <div class="button-group" style="flex-direction: column; align-items: flex-start; padding-top: 15px;">
-                <p>Команда вводится через <code class="code-block">cassie</code>, слова разделяются пробелом. Кавычки не нужны, регистр не важен.</p>
-                <div class="img-placeholder">
-                    Здесь можно разместить скриншот консоли Remote Admin с открытой вкладкой и введенной командой cassie.
+    <div class="constructor-container">
+        <div class="main-card">
+            <div class="card-title">// НАСТРОЙКИ КАРТЫ</div>
+            
+            <div class="input-group">
+                <label>Ваш Player ID</label>
+                <input type="number" id="playerID" value="1" placeholder="ID игрока">
+            </div>
+
+            <div class="input-group">
+                <label>Тип корпуса (Модель)</label>
+                <select id="cardModel">
+                    <option value="KeycardCustomTaskForce">TaskForce (Черно-золотая)</option>
+                    <option value="KeycardCustomMetalcase">Metal Case</option>
+                    <option value="keycardcustommanagement">Management</option>
+                    <option value="keycardcustomsite02">Site-02 Edition</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Название на карте</label>
+                <input type="text" id="cardName" value="NAME" placeholder="Введите имя...">
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                <div class="input-group">
+                    <label>Cont. Lvl</label>
+                    <input type="number" id="lvl1" value="3" min="0" max="3">
                 </div>
-                <p><b>Очередь сообщений:</b> Размещение слов в разных командах заставит систему перезапускаться для каждого слова.</p>
-                <ul>
-                    <li>Неправильно: <code class="code-block">cassie hello</code> затем <code class="code-block">cassie world</code> (будет два раздельных запуска).</li>
-                    <li>Правильно: <code class="code-block">cassie hello world</code></li>
-                </ul>
-                <div class="warning-box">
-                    <b>ВНИМАНИЕ:</b> C.A.S.S.I.E., вызываемая этой командой, работает отдельно от системной (которая объявляет спавн МОГ). Кастомная команда воспроизводит любые доступные слова, игнорируя стандартную логику.
+                <div class="input-group">
+                    <label>Arm. Lvl</label>
+                    <input type="number" id="lvl2" value="3" min="0" max="3">
+                </div>
+                <div class="input-group">
+                    <label>Adm. Lvl</label>
+                    <input type="number" id="lvl3" value="3" min="0" max="3">
                 </div>
             </div>
-        </details>
 
-        <details class="accordion-item">
-            <summary>Синтаксис и Модификаторы звука</summary>
-            <div class="button-group" style="flex-direction: column; align-items: flex-start; padding-top: 15px;">
-                <p><b>1. Тихий старт (без начального гудка):</b><br>
-                Используйте <code class="code-block">cassie_sl</code> (или _silent, _sn) вместо обычной команды.</p>
-
-                <p><b>2. Заикание (Глитч):</b><br>
-                Формат: <code class="code-block">jam_ЗАДЕРЖКА_КОЛИЧЕСТВО</code>. Задержка в формате 000, количество от 2 до 9.<br>
-                Пример: <code class="code-block">cassie jam_040_9 hello world</code></p>
-
-                <p><b>3. Паузы (Тишина):</b><br>
-                Каждая точка, окруженная пробелами = 1 секунда тишины.<br>
-                Пример: <code class="code-block">cassie hello . . world</code> (пауза 2 секунды).</p>
-
-                <p><b>4. Изменение тональности (Pitch):</b><br>
-                Формат: <code class="code-block">pitch_X.x</code> (десятичное число). По умолчанию стоит 1.<br>
-                Пример: <code class="code-block">cassie pitch_0.5 hello pitch_2 world</code></p>
-                
-                <p><b>5. Окончания слов:</b><br>
-                Множественное число: добавьте <code class="code-block">s, sh, ch, x, z</code> к слову.<br>
-                Прошедшее время: добавьте <code class="code-block">d</code> к слову.</p>
-
-                <button class="copy-btn btn-secondary" data-payload="clearcassie" style="margin-top: 10px;">Отменить текущее объявление (clearcassie)</button>
+            <div class="input-group">
+                <label>Цвет (HEX)</label>
+                <input type="text" id="cardColor" value="#EFC01A" placeholder="#FFFFFF">
             </div>
-        </details>
+        </div>
 
-        <details class="accordion-item">
-            <summary>Встроенные фразы и Звуки</summary>
-            <div class="button-group" style="flex-direction: column; align-items: flex-start; padding-top: 15px;">
-                <p>Фразы — это кодовые названия для длинных объявлений. Вот основные из них:</p>
-                <ul class="changelog-list">
-                    <li><b>.g1 / .g2 / .g3</b> — Различные системные гудки и сигналы.</li>
-                    <li><b>.g6</b> — Звук объявления SCP-079 из Containment Breach.</li>
-                    <li><b>Bell_Start / Bell_End</b> — Классические звуки начала и конца.</li>
-                    <li><b>AllSecured</b> — "All SCP subjects have been secured."</li>
-                    <li><b>MtfUnit</b> — "Mobile Task Force Unit"</li>
-                    <li><b>NoSCPsLeft</b> — Оповещение об остаточной угрозе.</li>
-                </ul>
-                <p style="margin-top: 15px;"><b>Алфавит НАТО:</b> Вводится через префикс NATO_ (например, <code class="code-block">NATO_A</code>, <code class="code-block">NATO_B</code>).</p>
-            </div>
-        </details>
+        <div class="result-box">
+            <div class="card-title" style="font-size: 1.2rem; margin-bottom: 15px;">// ГОТОВАЯ КОМАНДА</div>
+            <div id="command-output">ckeycard 1 KeycardCustomTaskForce Deluxe_Private_Card 3 3 3 #EFC01A 000000 NAME 420 69 1</div>
+            <button class="copy-btn btn-primary" id="copyBtn" style="width: 100%;">КОПИРОВАТЬ КОМАНДУ</button>
+        </div>
     </div>
-
-    <div class="main-card">
-        <div class="card-title">// CUSTOM INFO (ОПИСАНИЕ ИГРОКОВ)</div>
-        
-        <details class="accordion-item">
-            <summary>Теги форматирования</summary>
-            <div class="button-group" style="flex-direction: column; align-items: flex-start; padding-top: 15px;">
-                <div class="warning-box">Максимальная длина текста — <b>400 символов</b>. У каждого тега обязательно должен быть закрывающий парный тег (например, &lt;/b&gt;).</div>
-                <p>Доступные теги (пишите в формате &lt;тег&gt;):</p>
-                <ul style="line-height: 2;">
-                    <li><code class="code-block">&lt;size=Размер&gt;</code>Текст<code class="code-block">&lt;/size&gt;</code> — Размер шрифта</li>
-                    <li><code class="code-block">&lt;b&gt;</code><b>Жирный текст</b><code class="code-block">&lt;/b&gt;</code></li>
-                    <li><code class="code-block">&lt;i&gt;</code><i>Курсив</i><code class="code-block">&lt;/i&gt;</code></li>
-                    <li><code class="code-block">&lt;color=#HEX&gt;</code>Цветной текст<code class="code-block">&lt;/color&gt;</code></li>
-                </ul>
-                <div class="img-placeholder">
-                    Здесь можно показать скриншот того, как красиво оформленное CINFO выглядит в игре при наведении на игрока.
-                </div>
-            </div>
-        </details>
-
-        <details class="accordion-item">
-            <summary>Палитра доступных цветов (Клик для копирования)</summary>
-            <div class="button-group" style="padding-top: 15px;">
-                <p style="width: 100%;">Цвета обязательно должны быть в формате HEX, а буквы в коде — <b>ЗАГЛАВНЫМИ</b>.</p>
-                <div class="color-grid">
-                    <button class="color-btn copy-btn" data-payload="#FF96DE"><div class="color-swatch" style="background: #FF96DE;"></div> Pink</button>
-                    <button class="color-btn copy-btn" data-payload="#C50000"><div class="color-swatch" style="background: #C50000;"></div> Red</button>
-                    <button class="color-btn copy-btn" data-payload="#FFFFFF"><div class="color-swatch" style="background: #FFFFFF;"></div> Default</button>
-                    <button class="color-btn copy-btn" data-payload="#944710"><div class="color-swatch" style="background: #944710;"></div> Brown</button>
-                    <button class="color-btn copy-btn" data-payload="#A0A0A0"><div class="color-swatch" style="background: #A0A0A0;"></div> Silver</button>
-                    <button class="color-btn copy-btn" data-payload="#32CD32"><div class="color-swatch" style="background: #32CD32;"></div> Light Green</button>
-                    <button class="color-btn copy-btn" data-payload="#DC143C"><div class="color-swatch" style="background: #DC143C;"></div> Crimson</button>
-                    <button class="color-btn copy-btn" data-payload="#00B7EB"><div class="color-swatch" style="background: #00B7EB;"></div> Cyan</button>
-                    <button class="color-btn copy-btn" data-payload="#00FFFF"><div class="color-swatch" style="background: #00FFFF;"></div> Aqua</button>
-                    <button class="color-btn copy-btn" data-payload="#FF1493"><div class="color-swatch" style="background: #FF1493;"></div> Deep Pink</button>
-                    <button class="color-btn copy-btn" data-payload="#FF6448"><div class="color-swatch" style="background: #FF6448;"></div> Tomato</button>
-                    <button class="color-btn copy-btn" data-payload="#FAFF86"><div class="color-swatch" style="background: #FAFF86;"></div> Yellow</button>
-                    <button class="color-btn copy-btn" data-payload="#FF0090"><div class="color-swatch" style="background: #FF0090;"></div> Magenta</button>
-                    <button class="color-btn copy-btn" data-payload="#4DFFB8"><div class="color-swatch" style="background: #4DFFB8;"></div> Blue Green</button>
-                    <button class="color-btn copy-btn" data-payload="#FF9966"><div class="color-swatch" style="background: #FF9966;"></div> Orange</button>
-                    <button class="color-btn copy-btn" data-payload="#BFFF00"><div class="color-swatch" style="background: #BFFF00;"></div> Lime</button>
-                    <button class="color-btn copy-btn" data-payload="#228B22"><div class="color-swatch" style="background: #228B22;"></div> Green</button>
-                    <button class="color-btn copy-btn" data-payload="#50C878"><div class="color-swatch" style="background: #50C878;"></div> Emerald</button>
-                    <button class="color-btn copy-btn" data-payload="#960018"><div class="color-swatch" style="background: #960018;"></div> Carmine</button>
-                    <button class="color-btn copy-btn" data-payload="#727472"><div class="color-swatch" style="background: #727472;"></div> Nickel</button>
-                    <button class="color-btn copy-btn" data-payload="#98FB98"><div class="color-swatch" style="background: #98FB98;"></div> Mint</button>
-                    <button class="color-btn copy-btn" data-payload="#4B5320"><div class="color-swatch" style="background: #4B5320;"></div> Army Green</button>
-                    <button class="color-btn copy-btn" data-payload="#EE7600"><div class="color-swatch" style="background: #EE7600;"></div> Pumpkin</button>
-                </div>
-            </div>
-        </details>
-
-        <details class="accordion-item">
-            <summary>Ошибки в консоли (Ё)</summary>
-            <div class="button-group" style="flex-direction: column; align-items: flex-start; padding-top: 15px;">
-                <p><i>Все ошибки CINFO выводятся в клиентскую консоль. Обратите внимание, что туда попадают ошибки от всех игроков на сервере.</i></p>
-                <ul class="changelog-list" style="margin-top: 10px;">
-                    <li><b>Provided text has rich text tag...</b> — Использован запрещенный тег.</li>
-                    <li><b>Doesn't match the PlayerCustomInfo regex</b> — Превышен лимит (400 символов) или есть незакрытые теги.</li>
-                    <li><b>Invalid color</b> — Ошибка синтаксиса в написании HEX-кода.</li>
-                    <li><b>This color is not from allowed list</b> — Введенного цвета нет в списке разрешенных.</li>
-                </ul>
-            </div>
-        </details>
-    </div>
-
-    <div class="main-card">
-        <div class="card-title">// CUSTOM CARDS (КАСТОМНЫЕ КЛЮЧ-КАРТЫ)</div>
-        
-        <details class="accordion-item">
-            <summary>Создание кастомной карты</summary>
-            <div class="button-group" style="flex-direction: column; align-items: flex-start; padding-top: 15px;">
-                <p>На первый взгляд генерация карты кажется сложной, но достаточно использовать этот шаблон:</p>
-                <button class="copy-btn btn-primary" data-payload="ckeycard 1 KeycardCustomTaskForce Deluxe_Private_Card 3 3 3 #EFC01A 000000 NAME 420 69 1" style="width: 100%; text-transform: none; font-family: monospace;">
-                    ckeycard 1 KeycardCustomTaskForce Deluxe_Private_Card 3 3 3 #EFC01A 000000 NAME 420 69 1
-                </button>
-                
-                <div class="img-placeholder">
-                    Сюда нужно вставить картинку той самой черно-золотой карты из примера.
-                </div>
-
-                <p><b>Разбор команды по частям:</b></p>
-                <ul style="line-height: 1.8;">
-                    <li><b>1 (сразу после ckeycard):</b> Ваш Player ID. Узнать его можно в админ-панели (число перед вашим ником).</li>
-                    <li><b>NAME:</b> Замените на нужное имя карты.</li>
-                    <li><b>#EFC01A 000000:</b> HEX-коды цветов. Чтобы найти нужные цвета в игре, пропишите команду <code class="code-block">colors</code> в консоли.</li>
-                    <li><b>3 3 3:</b> Уровни доступа. Первый — уровень Содержания, второй — уровень Оружейной, третий — Административный.</li>
-                    <li><b>1 (в самом конце):</b> Ранг карты. 1 = Капитан (CPT), 2 = Сержант (SGT), 3 = Рядовой (PVT).</li>
-                </ul>
-            </div>
-        </details>
-    </div>
-
-    </div>
-
-<footer>
-    <p>Desolation Project &copy; 2026<br>Все права не защищены</p>
-</footer>
+</div>
 
 <script>
-    // Универсальный скрипт копирования (работает и для обычных кнопок, и для палитры цветов)
-    document.addEventListener('click', function(e) {
-        // Ищем кнопку, даже если кликнули по квадратику цвета внутри нее
-        const btn = e.target.closest('.copy-btn');
-        if (!btn) return;
+    const inputs = ['playerID', 'cardModel', 'cardName', 'lvl1', 'lvl2', 'lvl3', 'cardColor'];
+    const output = document.getElementById('command-output');
+
+    function updateCommand() {
+        const id = document.getElementById('playerID').value || "1";
+        const model = document.getElementById('cardModel').value;
+        const name = document.getElementById('cardName').value || "NAME";
+        const l1 = document.getElementById('lvl1').value || "0";
+        const l2 = document.getElementById('lvl2').value || "0";
+        const l3 = document.getElementById('lvl3').value || "0";
+        const color = document.getElementById('cardColor').value || "#FFFFFF";
+
+        // Собираем строку (шаблон из твоего гайда)
+        const cmd = `ckeycard ${id} ${model} Deluxe_Private_Card ${l1} ${l2} ${l3} ${color} 000000 ${name} 420 69 1`;
         
-        if (btn.classList.contains('success')) return;
+        output.innerText = cmd;
+    }
 
-        const textToCopy = btn.getAttribute('data-payload');
-        const originalHTML = btn.innerHTML; // Сохраняем внутренний HTML (чтобы вернуть квадратик цвета)
+    // Вешаем обновление на все поля
+    inputs.forEach(id => {
+        document.getElementById(id).addEventListener('input', updateCommand);
+    });
 
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            btn.innerHTML = 'СКОПИРОВАНО!';
-            btn.classList.add('success');
-            
-            // Если это кнопка цвета, добавляем ей зеленую обводку
-            if(btn.classList.contains('color-btn')) {
-                btn.style.borderColor = "var(--success)";
-                btn.style.color = "var(--success)";
-            }
-            
+    // Логика копирования
+    document.getElementById('copyBtn').addEventListener('click', function() {
+        navigator.clipboard.writeText(output.innerText).then(() => {
+            const originalText = this.innerText;
+            this.innerText = 'СКОПИРОВАНО!';
+            this.style.backgroundColor = 'var(--success)';
             setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.classList.remove('success');
-                if(btn.classList.contains('color-btn')) {
-                    btn.style.borderColor = "";
-                    btn.style.color = "";
-                }
-            }, 1200);
+                this.innerText = originalText;
+                this.style.backgroundColor = 'var(--accent)';
+            }, 1000);
         });
     });
 </script>

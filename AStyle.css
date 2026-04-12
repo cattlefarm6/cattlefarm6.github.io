@@ -12,6 +12,7 @@
     --accent: #478ac9;          /* Основной синий */
     --accent-hover: #191970;    /* Темно-синий для наведения */
     --success: #2ecc71;         /* Зеленый для успешного копирования */
+    --justorng: #FFA500;        /* Оранжевый для рестриктед
     
     /* Текст */
     --text-main: #eeeeee;       /* Основной светлый текст */
@@ -354,8 +355,8 @@ summary::after {
 
 .status-badge.restricted {
     background-color: rgba(224, 131, 0, 0.1);
-    color: var(--accent-hover);
-    border: 1px solid var(--accent-hover);
+    color: var(--justorng);
+    border: 1px solid var(--justorng);
 }
 
 .changelog-list {

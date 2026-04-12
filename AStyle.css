@@ -461,3 +461,96 @@ summary::after {
     border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
+/* --- СТИЛИ ДЛЯ КОНСТРУКТОРОВ --- */
+.constructor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .constructor-grid { grid-template-columns: 1fr; }
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.c-input, .c-select {
+    width: 100%;
+    padding: 10px 12px;
+    background: #0d1117;
+    border: 1px solid #2d3545;
+    border-radius: 4px;
+    color: #fff;
+    font-family: var(--font-body);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.c-input:focus, .c-select:focus {
+    border-color: var(--accent);
+}
+
+/* Стильные переключатели (Сегментированные кнопки) */
+.level-selector {
+    display: flex;
+    background: #0d1117;
+    border: 1px solid #2d3545;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.level-selector input[type="radio"] {
+    display: none; /* Прячем стандартные кружочки радиокнопок */
+}
+
+.level-selector label {
+    flex: 1;
+    text-align: center;
+    padding: 8px 0;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-right: 1px solid #2d3545;
+    font-weight: 700;
+    font-family: var(--font-body);
+    transition: all 0.2s ease;
+}
+
+.level-selector label:last-child {
+    border-right: none;
+}
+
+/* Состояние, когда кнопка нажата */
+.level-selector input[type="radio"]:checked + label {
+    background: var(--accent);
+    color: #000;
+}
+
+.result-box {
+    grid-column: 1 / -1; /* Растягиваем на всю ширину */
+    background: #000;
+    padding: 20px;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.result-command {
+    font-family: 'Courier New', monospace;
+    color: var(--success);
+    word-break: break-all;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    line-height: 1.4;
+}

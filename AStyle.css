@@ -272,3 +272,25 @@ footer {
         min-width: 100%;
     }
 }
+/* Анимация списка */
+/* 1. Создаем саму анимацию */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px); /* Начинаем чуть выше */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);    /* Приплываем на место */
+    }
+}
+
+/* 2. Применяем её только тогда, когда список открыт */
+details[open] .button-group {
+    animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Плавная "кривая" скорости */
+}
+
+/* 3. Добавим плавности для самой стрелочки (бонус) */
+summary::after {
+    transition: transform 0.3s ease;
+}

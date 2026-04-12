@@ -57,8 +57,101 @@
         </details>
 
     </div>
-    
+    <div class="main-card">
+        <div class="card-title">// ИНТЕРАКТИВНЫЙ КОНСТРУКТОР</div>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Настройте параметры ниже, чтобы автоматически сгенерировать команду выдачи кастомной карты.</p>
+
+        <div class="constructor-grid">
+            <div>
+                <div class="input-group">
+                    <label>ID Игрока</label>
+                    <input type="number" id="c_id" class="c-input" value="1" min="1">
+                </div>
+                <div class="input-group">
+                    <label>Внешний вид (Модель)</label>
+                    <select id="c_model" class="c-select">
+                        <option value="keycardcustommanagement">Management</option>
+                        <option value="KeycardCustomTaskForce">TaskForce (МОГ)</option>
+                        <option value="KeycardCustomMetalcase">Metal Case</option>
+                        <option value="keycardcustomsite02">Site-02 Edition</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Название в инвентаре</label>
+                    <input type="text" id="c_invName" class="c-input" value="Keycard">
+                </div>
+                <div class="input-group">
+                    <label>Надпись на карте</label>
+                    <input type="text" id="c_cardText" class="c-input" value="Ключ-карта">
+                </div>
+                <div class="input-group">
+                    <label>Никнейм владельца</label>
+                    <input type="text" id="c_owner" class="c-input" value="Никнейм">
+                </div>
+            </div>
+
+            <div>
+                <div class="input-group">
+                    <label>Допуск к SCP</label>
+                    <div class="level-selector" id="scp_group">
+                        <input type="radio" name="c_scp" id="scp0" value="0"><label for="scp0">0</label>
+                        <input type="radio" name="c_scp" id="scp1" value="1"><label for="scp1">1</label>
+                        <input type="radio" name="c_scp" id="scp2" value="2"><label for="scp2">2</label>
+                        <input type="radio" name="c_scp" id="scp3" value="3" checked><label for="scp3">3</label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Допуск к Оружию</label>
+                    <div class="level-selector" id="weap_group">
+                        <input type="radio" name="c_weap" id="w0" value="0"><label for="w0">0</label>
+                        <input type="radio" name="c_weap" id="w1" value="1"><label for="w1">1</label>
+                        <input type="radio" name="c_weap" id="w2" value="2" checked><label for="w2">2</label>
+                        <input type="radio" name="c_weap" id="w3" value="3"><label for="w3">3</label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Админ. Допуск</label>
+                    <div class="level-selector" id="adm_group">
+                        <input type="radio" name="c_adm" id="a0" value="0"><label for="a0">0</label>
+                        <input type="radio" name="c_adm" id="a1" value="1" checked><label for="a1">1</label>
+                        <input type="radio" name="c_adm" id="a2" value="2"><label for="a2">2</label>
+                        <input type="radio" name="c_adm" id="a3" value="3"><label for="a3">3</label>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <div class="input-group" style="flex: 1;">
+                        <label>Цвет кружков</label>
+                        <input type="text" id="c_circleColor" class="c-input" value="red">
+                    </div>
+                    <div class="input-group" style="flex: 1;">
+                        <label>Цвет фона</label>
+                        <input type="text" id="c_bgColor" class="c-input" value="black">
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <div class="input-group" style="flex: 1;">
+                        <label>Цвет текста</label>
+                        <input type="text" id="c_textColor" class="c-input" value="blue">
+                    </div>
+                    <div class="input-group" style="flex: 1;">
+                        <label>Кол-во кружков</label>
+                        <input type="number" id="c_circleCount" class="c-input" value="1" min="0" max="3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-box">
+                <div style="color: #666; font-size: 0.8rem; margin-bottom: 5px;">// РЕЗУЛЬТАТ:</div>
+                <div class="result-command" id="final-command">ckeycard 1 keycardcustommanagement Keycard 3 2 1 red black Ключ-карта blue Никнейм 1</div>
+                <button class="copy-btn btn-primary" id="copy-constructor-btn" style="width: 100%;">СКОПИРОВАТЬ</button>
+            </div>
+        </div>
     </div>
+    
+    
+</div>
 
 <footer>
     <p>Desolation Project &copy; 2026<br>Все права не защищены</p>
@@ -90,6 +183,46 @@
             });
         }
     });
+    // ЛОГИКА КОНСТРУКТОРОВ КАРТ
+    const finalCommandEl = document.getElementById('final-command');
+    const copyBtn = document.getElementById('copy-constructor-btn');
+    
+    // Функция сборки команды
+    function generateCommand() {
+        // Собираем значения из обычных полей
+        const id = document.getElementById('c_id').value || '1';
+        const model = document.getElementById('c_model').value;
+        const invName = document.getElementById('c_invName').value || 'Keycard';
+        const cardText = document.getElementById('c_cardText').value || 'Ключ-карта';
+        const owner = document.getElementById('c_owner').value || 'Никнейм';
+        const circleColor = document.getElementById('c_circleColor').value || 'red';
+        const bgColor = document.getElementById('c_bgColor').value || 'black';
+        const textColor = document.getElementById('c_textColor').value || 'blue';
+        const circleCount = document.getElementById('c_circleCount').value || '1';
+
+        // Собираем значения из стильных радиокнопок
+        const scp = document.querySelector('input[name="c_scp"]:checked').value;
+        const weap = document.querySelector('input[name="c_weap"]:checked').value;
+        const adm = document.querySelector('input[name="c_adm"]:checked').value;
+
+        // Формируем финальную строку
+        const cmd = `ckeycard ${id} ${model} ${invName} ${scp} ${weap} ${adm} ${circleColor} ${bgColor} ${cardText} ${textColor} ${owner} ${circleCount}`;
+        
+        finalCommandEl.innerText = cmd;
+        
+        // ФИКС: Передаем команду в твой универсальный скрипт копирования
+        copyBtn.setAttribute('data-payload', cmd);
+    }
+
+    // Слушаем изменения во всех инпутах конструктора
+    const allInputs = document.querySelectorAll('.c-input, .c-select, input[type="radio"]');
+    allInputs.forEach(input => {
+        input.addEventListener('input', generateCommand);
+        input.addEventListener('change', generateCommand);
+    });
+
+    // Запускаем один раз при загрузке страницы, чтобы кнопка сразу получила данные
+    generateCommand();
 </script>
 
 </body>

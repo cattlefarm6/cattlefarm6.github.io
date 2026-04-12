@@ -3,89 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guides | Desolation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
-   <link rel="stylesheet" href="AStyle.css">
-    
+    <title>Guides | Desolation Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="AStyle.css">
 </head>
 <body>
 
 <header>
     <div class="logo">Desolation <strong>Project</strong></div>
     <nav>
-        <a href="./">Главная</a>
+        <a href="index.html">Главная</a>
         <a href="cassie.html">C.A.S.S.I.E.</a>
         <a href="cinfo.html">Cinfo</a>
         <a href="ccards.html">CCards</a>
-        <a href="guides.html" class="active" >Гайд</a> </nav>
+        <a href="guides.html" class="active">Guides</a>
+    </nav>
 </header>
 
 <div class="container">
-    <h1>C.A.S.1</h1>
-    <div class="instruction">Используйте кнопки внутри списков для копирования конфигураций</div>
+    <h1>Полезная Информация</h1>
+    <div class="instruction">Справочник по Custom-Info, командам ProjectMER и администрированию</div>
 
     <div class="main-card">
-        <div class="card-title">Кастомные уведомления </div>
-
+        <div class="card-title">// CUSTOM-INFO & ТЕГИ</div>
+        
         <details class="accordion-item">
-            <summary>Служба безопасности</summary>
-            <div class="button-group">
-                <button class="copy-btn btn-primary" data-payload="Йоу йоу йоу">Копировать Конфиг</button>
-                
-                <button class="copy-btn btn-secondary" data-payload="CODE_SEC_1">Копировать Конфиг</button>
-
-                <button class="copy-btn btn-primary" data-payload="Йоу йоу йоу">Копировать Конфиг</button>
-                <button class="copy-btn btn-secondary" data-payload="CODE_SEC_1">Копировать Конфиг</button>
-        </details>
-
-        <details class="accordion-item">
-            <summary>Научная служба и руководство</summary>
-            <div class="button-group">
-                <button class="copy-btn btn-primary" data-payload="CODE_SCI_1">Конфиг Научников</button>
-                <button class="copy-btn btn-secondary" data-payload="CODE_SCI_2">Конфиг Руководства</button>
+            <summary>Доступные теги и ограничения</summary>
+            <div class="button-group" style="flex-direction: column; align-items: flex-start;">
+                <p>Максимальная длина: <b>400 символов</b>. Обязателен закрывающий тег.</p>
+                <code class="code-block">&lt;size&gt;размер&lt;/size&gt;</code>
+                <code class="code-block">&lt;b&gt;жирность&lt;/b&gt;</code>
+                <code class="code-block">&lt;i&gt;курсив&lt;/i&gt;</code>
+                <code class="code-block">&lt;color=#FFFFFF&gt;цвет&lt;/color&gt;</code>
+                <p style="color: var(--accent-hover); font-size: 0.8rem;">* Буквы в HEX-коде цвета должны быть ЗАГЛАВНЫМИ.</p>
             </div>
         </details>
 
         <details class="accordion-item">
-            <summary>Персонал фонда и класс D</summary>
-            <div class="button-group">
-                <button class="copy-btn btn-primary" data-payload="CODE_D_1">Карта D-Класса</button>
-                <button class="copy-btn btn-secondary" data-payload="CODE_D_2">Карта Персонала</button>
+            <summary>Расшифровка ошибок в консоли (Ё)</summary>
+            <div class="button-group" style="flex-direction: column; align-items: flex-start;">
+                <p><b>Provided text has rich text tag...</b> — Использован запрещенный тег.</p>
+                <p><b>Doesn't match the PlayerCustomInfo regex</b> — Лимит 400 знаков или ошибка в закрытии тегов.</p>
+                <p><b>Invalid color / Not from allowed list</b> — Ошибка в HEX-коде или цвета нет в белом списке.</p>
+            </div>
+        </details>
+    </div>
+
+    <div class="main-card">
+        <div class="card-title">// СТРОИТЕЛЬСТВО (PROJECT MER)</div>
+        <p style="font-size: 0.9rem; margin-bottom: 20px;">Основная команда: <span style="color: var(--accent);">mp</span> (пишется в Remote Admin). Кавычки `` использовать не нужно.</p>
+
+        <details class="accordion-item">
+            <summary>ToolGun (Инструментарий)</summary>
+            <div class="button-group" style="flex-direction: column; align-items: flex-start;">
+                <p>Выдача: <code class="code-block">mp tg</code></p>
+                <ul class="changelog-list" style="margin-top: 10px;">
+                    <li><b>R / T</b> — Переключение объектов</li>
+                    <li><b>F</b> — Режим Установка / Удаление</li>
+                    <li><b>ПКМ / ЛКМ</b> — Выделение / Действие</li>
+                </ul>
             </div>
         </details>
 
+        <details class="accordion-item">
+            <summary>Работа с Картами и Схематиками</summary>
+            <div class="button-group" style="flex-direction: column; gap: 10px;">
+                <button class="copy-btn btn-secondary" data-payload="mp save ">mp save [название]</button>
+                <button class="copy-btn btn-secondary" data-payload="mp load ">mp load [название]</button>
+                <button class="copy-btn btn-secondary" data-payload="mp list">mp list (Список)</button>
+                <button class="copy-btn btn-primary" data-payload="mp unload">mp unload (Очистка)</button>
+            </div>
+        </details>
+
+        <details class="accordion-item">
+            <summary>Манипуляция объектами (Позиция/Размер)</summary>
+            <div class="button-group" style="flex-direction: column; align-items: flex-start;">
+                <p>Выделите объект командой <code class="code-block">mp select</code></p>
+                <code class="code-block">mp position set x y z</code>
+                <code class="code-block">mp rotation add x y z</code>
+                <code class="code-block">mp scale set x y z</code>
+                <code class="code-block">mp position grab (Взять в руки)</code>
+            </div>
+        </details>
     </div>
-    
+
+    <div class="main-card">
+        <div class="card-title">// МАССОВЫЕ КОМАНДЫ И ID</div>
+        
+        <details class="accordion-item">
+            <summary>Группировка по ролям</summary>
+            <div class="button-group" style="flex-direction: column; align-items: flex-start;">
+                <p>Можно писать ID через точку: <code class="code-block">setname 13.21.55 [ИМЯ]</code></p>
+                <p>Или по кодовому названию:</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; font-family: monospace; font-size: 0.8rem;">
+                    <div>• all (*) - Все</div>
+                    <div>• military - МОГ/ПХ/СБ</div>
+                    <div>• alive - Живые</div>
+                    <div>• staff - Персонал</div>
+                    <div>• scp - Все SCP</div>
+                    <div>• mtf - Все МОГ</div>
+                </div>
+            </div>
+        </details>
     </div>
+
+</div>
 
 <footer>
     <p>Desolation Project &copy; 2026<br>Все права не защищены</p>
 </footer>
 
 <script>
-    // Оптимизированный JS
+    // Тот же скрипт для копирования
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('copy-btn')) {
             const btn = e.target;
-            // Проверка, не нажата ли уже кнопка (чтобы избежать спама кликами)
             if (btn.classList.contains('success')) return;
-
             const textToCopy = btn.getAttribute('data-payload');
             const originalText = btn.innerText;
-
             navigator.clipboard.writeText(textToCopy).then(() => {
-                btn.innerText = 'СКОПИРОВАНО!';
+                btn.innerText = 'ГОТОВО!';
                 btn.classList.add('success');
-                
                 setTimeout(() => {
                     btn.innerText = originalText;
                     btn.classList.remove('success');
-                }, 1500);
-            }).catch(err => {
-                console.error('Ошибка копирования: ', err);
-                btn.innerText = 'ОШИБКА!';
-                setTimeout(() => btn.innerText = originalText, 1500);
+                }, 1000);
             });
         }
     });

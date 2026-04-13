@@ -204,8 +204,8 @@ summary::-webkit-details-marker {
 
 .copy-btn {
     /* Ширина кнопки = 50% минус половина отступа (15px/2) */
-    flex: 0 0 calc(50% - 7.5px); 
-    min-width: calc(50% - 7.5px);
+    flex: 1 1 calc(100% - 7.5px); 
+    min-width: calc(100% - 7.5px);
     
     padding: 14px;
     border: none;

@@ -2,26 +2,25 @@
 
 /* --- 1. ПЕРЕМЕННЫЕ (Цветовая палитра и настройки) --- */
 :root {
-    /* Цвета фона: Хвойный мрак */
-    --bg-page: #0d1b1e;         
-    --bg-card: #14282c;         
-    --bg-item: #1a363b;         
-    --bg-item-hover: #21444b;   
+    /* Цвета фона: Темно-бордовый и черный */
+    --bg-page: #110000;         
+    --bg-card: #1f0000;         
+    --bg-item: #330000;         
+    --bg-item-hover: #4d0000;   
     
-    /* Акценты: Листва и солнце */
-    --accent: #4ade80;          /* Светло-зеленый */
-    --accent-hover: #86efac;    /* Бледно-зеленый */
-    --success: #0ea5e9;         /* Ясное небо */
-    --justorng: #f59e0b;        /* Теплый янтарь */
+    /* Акценты: Багровые реки */
+    --accent: #ff003c;          /* Рубиновый */
+    --accent-hover: #ff4d6d;    /* Светло-алый */
+    --success: #00ff73;         /* Холодный зеленый */
+    --justorng: #ff8c00;        /* Классический оранжевый */
     
     /* Текст */
-    --text-main: #ecfdf5;       
-    --text-muted: #94a3b8;      
+    --text-main: #ffe6e6;       
+    --text-muted: #b38080;      
     
     /* Шрифты */
-    --font-heading: 'Cinzel', serif;
-    --font-body: 'Raleway', sans-serif;
-}
+    --font-heading: 'Teko', sans-serif;
+    --font-body: 'Roboto Condensed', sans-serif;
 
 /* --- 2. БАЗОВЫЕ НАСТРОЙКИ --- */
 * {

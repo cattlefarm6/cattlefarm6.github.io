@@ -2,26 +2,26 @@
 
 /* --- 1. ПЕРЕМЕННЫЕ (Цветовая палитра и настройки) --- */
 :root {
-    /* Цвета фона: Темный шоколад и кофе */
-    --bg-page: #1c1917;         
-    --bg-card: #292524;         
-    --bg-item: #44403c;         
-    --bg-item-hover: #57534e;   
+    /* Цвета фона: Истинный черный и графит */
+    --bg-page: #000000;         
+    --bg-card: #0a0a0a;         
+    --bg-item: #141414;         
+    --bg-item-hover: #1f1f1f;   
     
-    /* Акценты: Карамель и специи */
-    --accent: #d97706;          /* Золотисто-коричневый */
-    --accent-hover: #fcd34d;    /* Мягкий желтый */
-    --success: #10b981;         /* Изумрудный */
-    --justorng: #ea580c;        /* Ржаво-оранжевый */
+    /* Акценты: Терминальный зеленый */
+    --accent: #00ff41;          /* Классический матричный */
+    --accent-hover: #39ff14;    /* Яркий салатовый */
+    --success: #008f11;         /* Темно-зеленый */
+    --justorng: #ff9900;        /* Предупреждающий желто-оранжевый */
     
     /* Текст */
-    --text-main: #fafaf9;       
-    --text-muted: #a8a29e;      
+    --text-main: #e0ffe0;       
+    --text-muted: #008f11;      
     
     /* Шрифты */
-    --font-heading: 'Merriweather', serif;
-    --font-body: 'Nunito', sans-serif;
-
+    --font-heading: 'Share Tech Mono', monospace;
+    --font-body: 'Courier New', monospace;
+    
 /* --- 2. БАЗОВЫЕ НАСТРОЙКИ --- */
 * {
     box-sizing: border-box; /* Чтобы отступы не ломали ширину блоков */

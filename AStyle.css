@@ -2,25 +2,25 @@
 
 /* --- 1. ПЕРЕМЕННЫЕ (Цветовая палитра и настройки) --- */
 :root {
-    /* Цвета фона: Морская глубина */
-    --bg-page: #011627;         
-    --bg-card: #012a4a;         
-    --bg-item: #013a63;         
-    --bg-item-hover: #01497c;   
+    /* Цвета фона: Серо-фиолетовый мрак */
+    --bg-page: #282a36;         
+    --bg-card: #383a59;         
+    --bg-item: #44475a;         
+    --bg-item-hover: #6272a4;   
     
-    /* Акценты: Вода и кораллы */
-    --accent: #2ec4b6;          /* Бирюзовый */
-    --accent-hover: #cbf3f0;    /* Светлая морская волна */
-    --success: #20a4f3;         /* Ярко-голубой */
-    --justorng: #ff9f1c;        /* Ярко-оранжевый */
+    /* Акценты: Сочные пастельные */
+    --accent: #bd93f9;          /* Фиолетовый */
+    --accent-hover: #ff79c6;    /* Розовый */
+    --success: #50fa7b;         /* Салатовый */
+    --justorng: #ffb86c;        /* Апельсиновый */
     
     /* Текст */
-    --text-main: #fdfffc;       
-    --text-muted: #8ea8c3;      
+    --text-main: #f8f8f2;       
+    --text-muted: #bcc2cd;      
     
     /* Шрифты */
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Lato', sans-serif;
+    --font-heading: 'Fira Code', monospace;
+    --font-body: 'Inter', sans-serif;
     
 /* --- 2. БАЗОВЫЕ НАСТРОЙКИ --- */
 * {

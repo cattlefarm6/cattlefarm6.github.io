@@ -2,25 +2,25 @@
 
 /* --- 1. ПЕРЕМЕННЫЕ (Цветовая палитра и настройки) --- */
 :root {
-    /* Цвета фона: Истинный черный и графит */
-    --bg-page: #000000;         
-    --bg-card: #0a0a0a;         
-    --bg-item: #141414;         
-    --bg-item-hover: #1f1f1f;   
+    /* Цвета фона: Морская глубина */
+    --bg-page: #011627;         
+    --bg-card: #012a4a;         
+    --bg-item: #013a63;         
+    --bg-item-hover: #01497c;   
     
-    /* Акценты: Терминальный зеленый */
-    --accent: #00ff41;          /* Классический матричный */
-    --accent-hover: #39ff14;    /* Яркий салатовый */
-    --success: #008f11;         /* Темно-зеленый */
-    --justorng: #ff9900;        /* Предупреждающий желто-оранжевый */
+    /* Акценты: Вода и кораллы */
+    --accent: #2ec4b6;          /* Бирюзовый */
+    --accent-hover: #cbf3f0;    /* Светлая морская волна */
+    --success: #20a4f3;         /* Ярко-голубой */
+    --justorng: #ff9f1c;        /* Ярко-оранжевый */
     
     /* Текст */
-    --text-main: #e0ffe0;       
-    --text-muted: #008f11;      
+    --text-main: #fdfffc;       
+    --text-muted: #8ea8c3;      
     
     /* Шрифты */
-    --font-heading: 'Share Tech Mono', monospace;
-    --font-body: 'Courier New', monospace;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
     
 /* --- 2. БАЗОВЫЕ НАСТРОЙКИ --- */
 * {

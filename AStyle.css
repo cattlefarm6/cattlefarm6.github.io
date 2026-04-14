@@ -2,25 +2,25 @@
 
 /* --- 1. ПЕРЕМЕННЫЕ (Цветовая палитра и настройки) --- */
 :root {
-    /* Цвета фона: Серо-фиолетовый мрак */
-    --bg-page: #282a36;         
-    --bg-card: #383a59;         
-    --bg-item: #44475a;         
-    --bg-item-hover: #6272a4;   
+    /* Цвета фона: Серо-синие оттенки */
+    --bg-page: #2e3440;         
+    --bg-card: #3b4252;         
+    --bg-item: #434c5e;         
+    --bg-item-hover: #4c566a;   
     
-    /* Акценты: Сочные пастельные */
-    --accent: #bd93f9;          /* Фиолетовый */
-    --accent-hover: #ff79c6;    /* Розовый */
-    --success: #50fa7b;         /* Салатовый */
-    --justorng: #ffb86c;        /* Апельсиновый */
+    /* Акценты: Приглушенные льдистые */
+    --accent: #88c0d0;          /* Морозный синий */
+    --accent-hover: #81a1c1;    /* Темный лед */
+    --success: #a3be8c;         /* Приглушенный зеленый */
+    --justorng: #ebcb8b;        /* Песочно-желтый */
     
     /* Текст */
-    --text-main: #f8f8f2;       
-    --text-muted: #bcc2cd;      
+    --text-main: #eceff4;       
+    --text-muted: #d8dee9;      
     
     /* Шрифты */
-    --font-heading: 'Fira Code', monospace;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Rubik', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
     
 /* --- 2. БАЗОВЫЕ НАСТРОЙКИ --- */
 * {

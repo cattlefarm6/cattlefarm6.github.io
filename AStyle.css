@@ -1,576 +1,707 @@
-/*DESOLATION PROJECT | DARK THEME*/
+/* PROTOCOL: REVIVAL | DESOLATION PROJECT */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap');
 
-/* --- 1. ПЕРЕМЕННЫЕ (Цветовая палитра и настройки) --- */
 :root {
-    /* Цвета фона: Глубокий космос */
-    --bg-page: #0d1117;         /* Чистый черный */
-    --bg-card: #161b22;         /* Чуть заметная карточка */
-    --bg-item: #21262d;         /* Элементы списка */
-    --bg-item-hover: #30363d;   /* Наведение */
-    
-    /* Акценты: Небо и бледная роза */
-    --accent: #87CEEB;          /* Небесно-голубой (Celestial Blue) */
-    --accent-hover: #b0e0e6;    /* Более светлый голубой при наведении */
-    --success: #00fa9a;         /* Холодный мятно-зеленый (подходит к голубому) */
-    --justorng: #fff0f5;        /* Лавандово-розовый (почти белый) */
-    
-    /* Текст */
-    --text-main: #ffffff;       /* Чистый белый текст */
-    --text-muted: #888888;      /* Тусклый текст */
-    
-    /* Шрифты */
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Montserrat', sans-serif;
-}
-    
-/* --- 2. БАЗОВЫЕ НАСТРОЙКИ --- */
-* {
-    box-sizing: border-box; /* Чтобы отступы не ломали ширину блоков */
+    --bg-page: #060a0f;
+    --bg-card: #0b1018;
+    --bg-item: #0f1620;
+    --bg-item-hover: #141d2a;
+    --accent: #00c8ff;
+    --accent-dim: rgba(0,200,255,0.15);
+    --accent-hover: #40daff;
+    --success: #00ff9d;
+    --danger: #ff3c3c;
+    --warning: #ffb800;
+    --text-main: #d0e8f0;
+    --text-muted: #4a6a7a;
+    --text-bright: #ffffff;
+    --border: rgba(0,200,255,0.15);
+    --border-bright: rgba(0,200,255,0.5);
+    --scanline: rgba(0,200,255,0.03);
+    --font-display: 'Orbitron', monospace;
+    --font-ui: 'Rajdhani', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+    --glow: 0 0 20px rgba(0,200,255,0.3), 0 0 60px rgba(0,200,255,0.1);
+    --glow-sm: 0 0 8px rgba(0,200,255,0.4);
 }
 
-body { 
-    font-family: var(--font-body); 
-    margin: 0; 
-    background-color: var(--bg-page); 
-    color: var(--text-main); 
-    line-height: 1.5;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-ui);
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.6;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
-/* --- 3. ШАПКА И НАВИГАЦИЯ --- */
+/* ═══ ФОН — ГЕКСАГОНАЛЬНАЯ СЕТКА + СКАНЛАЙНЫ ═══ */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 2px, var(--scanline) 2px, var(--scanline) 4px),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='104' viewBox='0 0 60 104'%3E%3Cpath d='M30 2 L58 17 L58 47 L30 62 L2 47 L2 17 Z' fill='none' stroke='rgba(0,200,255,0.04)' stroke-width='1'/%3E%3Cpath d='M30 62 L58 77 L58 107 L30 122 L2 107 L2 77 Z' fill='none' stroke='rgba(0,200,255,0.04)' stroke-width='1'/%3E%3Cpath d='M-30 2 L-2 17 L-2 47 L-30 62 L-58 47 L-58 17 Z' fill='none' stroke='rgba(0,200,255,0.04)' stroke-width='1'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ═══ УГЛОВЫЕ ДЕКОРАЦИИ ═══ */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0; right: 0;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle at top right, rgba(0,200,255,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ═══ ШАПКА ═══ */
 header {
-    padding: 0 5%; /* Убираем вертикальный padding здесь */
-    background-color: var(--bg-card);
-    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 64px;
+    padding: 0 5%;
+    background: rgba(6,10,15,0.92);
+    border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px; /* Фиксируем высоту шапки для стабильности */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
-nav {
-    display: flex;
-    gap: 0; /* Убираем gap, заменим его на padding у ссылок для точности */
-    height: 100%; /* Навигация занимает всю высоту шапки */
+header::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.5;
 }
 
-nav a { 
-    position: relative; /* Нужно для привязки линии */
-    text-decoration: none; 
-    color: #aaa; 
-    font-weight: 500; 
+.logo {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    padding: 0 15px; /* Отступы по бокам */
-    height: 60px; /* Высота совпадает с header */
-    display: flex;
-    align-items: center; /* Центрируем текст по вертикали */
-    transition: color 0.2s ease; 
+    color: var(--text-muted);
+}
+.logo strong {
+    color: var(--accent);
+    font-weight: 900;
+    text-shadow: var(--glow-sm);
 }
 
-/* Линия под текстом */
+nav { display: flex; height: 100%; gap: 0; }
+
+nav a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    height: 100%;
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+
 nav a::after {
     content: '';
     position: absolute;
-    bottom: 0; /* Линия ровно на границе border-bottom шапки */
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #fff; /* Белая линия при наведении */
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
     transition: width 0.3s ease;
+    box-shadow: var(--glow-sm);
 }
 
-nav a:hover {
-    color: #fff;
-}
+nav a:hover { color: var(--text-main); }
+nav a:hover::after { width: 100%; }
+nav a.active { color: var(--accent); }
+nav a.active::after { width: 100%; }
 
-nav a:hover::after {
-    width: 100%; /* Линия выезжает на всю ширину */
-}
-
-/* Состояние активной страницы */
-nav a.active { 
-    color: var(--accent); 
-}
-
-nav a.active::after {
-    width: 100%;
-    background-color: var(--accent); /* Линия активной страницы цветом акцента */
-}
-
-/* --- 4. ОСНОВНАЯ СЕТКА И ЗАГОЛОВКИ --- */
+/* ═══ КОНТЕЙНЕР ═══ */
 .container {
-    max-width: 1000px;
-    margin: 50px auto;
-    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+    max-width: 1020px;
+    margin: 60px auto;
+    padding: 0 24px;
 }
 
-h1 { 
-    font-family: var(--font-heading); 
-    font-size: 3.5rem; 
-    letter-spacing: 4px;
-    margin-bottom: 5px;
+/* ═══ ЗАГОЛОВКИ ═══ */
+h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    letter-spacing: 6px;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--text-bright);
+    line-height: 1;
+    margin-bottom: 6px;
+    text-shadow: 0 0 30px rgba(0,200,255,0.2);
 }
 
 .instruction {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
     color: var(--text-muted);
-    text-transform: uppercase;
-    font-size: 0.85rem;
     letter-spacing: 1px;
-    margin-bottom: 40px;
-    border-left: 2px solid var(--accent); 
-    padding-left: 15px;
-}
-
-/* --- 5. КОНТЕЙНЕРЫ (КАРТОЧКИ) --- */
-.main-card {
-    background-color: var(--bg-card); 
-    border: 1px solid #222;
-    border-radius: 12px;
-    padding: 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    margin-bottom: 30px; 
-}
-
-.card-title {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #fff;
-}
-
-/* --- 6. АККОРДЕОНЫ (ВЫПАДАЮЩИЕ СПИСКИ) --- */
-.accordion-item {
-    background-color: var(--bg-item); 
-    margin-bottom: 12px;
-    border-radius: 6px;
-    overflow: hidden;
-    transition: background-color 0.2s;
-}
-
-.accordion-item:hover { 
-    background-color: var(--bg-item-hover); 
-}
-
-summary {
-    padding: 18px 25px;
-    font-weight: 700;
-    cursor: pointer;
-    list-style: none; 
+    margin-bottom: 50px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    color: var(--accent); 
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    outline: none; 
-    user-select: none;
+    gap: 10px;
 }
 
-/* Доступность: рамка при навигации с клавиатуры (Tab) */
-summary:focus-visible {
-    box-shadow: inset 0 0 0 2px var(--accent);
-}
-
-/* Кастомная стрелочка */
-summary::after {
-    content: '▼';
-    font-size: 0.7rem;
-    color: #666;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-details[open] summary::after { 
-    transform: rotate(180deg); 
-    color: var(--accent); 
-}
-
-summary::-webkit-details-marker { 
-    display: none; /* Убираем стандартный маркер в Safari */
-}
-
-/* --- 7. КНОПКИ (СЕТКА ШАХМАТКОЙ) --- */
-.button-group {
-    display: flex;
-    flex-wrap: wrap; /* Позволяет кнопкам прыгать на новую строку */
-    gap: 15px;
-    padding: 0 25px 25px 25px;
-}
-
-.copy-btn {
-    /* Ширина кнопки = 50% минус половина отступа (15px/2) */
-    flex: 1 1 calc(100% - 7.5px); 
-    min-width: calc(100% - 7.5px);
-    
-    padding: 14px;
-    border: none;
-    border-radius: 4px;
-    font-weight: 700;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    text-align: center;
-}
-
-/* Стилизация конкретных кнопок */
-.btn-primary { 
-    background-color: var(--accent); 
-    color: #000; 
-}
-.btn-primary:hover { 
-    background-color: var(--accent-hover); 
-    transform: translateY(-1px); 
-}
-
-.btn-secondary { 
-    background-color: #3b4252; 
-    color: #fff; 
-    border: 1px solid #2e3440; 
-}
-.btn-secondary:hover { 
-    background-color: #2e3440; 
-    transform: translateY(-1px); 
-}
-
-/* Успешное копирование */
-.copy-btn.success { 
-    background-color: var(--success) !important; 
-    color: #fff !important; 
-    border-color: var(--success); 
-    transform: translateY(0);
-}
-
-/* --- 8. ПОДВАЛ --- */
-footer {
-    margin-top: 80px;
-    padding: 40px 20px;
-    background-color: #1a1f29;
-    color: var(--text-muted);
-    text-align: center;
-    border-top: 1px solid #222;
+.instruction::before {
+    content: '//';
+    color: var(--accent);
     font-size: 0.9rem;
 }
 
-/* --- 9. АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ --- */
-@media (max-width: 768px) {
-    header { 
-        flex-direction: column; 
-        gap: 15px; 
-        text-align: center; 
-        padding: 20px; 
-    }
-    
-    nav { 
-        flex-wrap: wrap; 
-        justify-content: center; 
-    }
-    
-    .main-card { 
-        padding: 25px 15px; 
-    }
-    
-    h1 { 
-        font-size: 2.2rem; 
-    }
-    
-    summary { 
-        padding: 15px; 
-        font-size: 0.9rem; 
-    }
-    
-    /* На телефонах кнопки выстраиваются в одну колонку (100% ширины) */
-    .copy-btn {
-        flex: 0 0 100%;
-        min-width: 100%;
-    }
-}
-/* Анимация списка */
-/* 1. Создаем саму анимацию */
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-15px); /* Начинаем чуть выше */
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);    /* Приплываем на место */
-    }
+/* ═══ КАРТОЧКИ ═══ */
+.main-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 36px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
 }
 
-/* 2. Применяем её только тогда, когда список открыт */
-details[open] .button-group {
-    animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Плавная "кривая" скорости */
+/* Угловые маркеры */
+.main-card::before,
+.main-card::after {
+    content: '';
+    position: absolute;
+    width: 12px; height: 12px;
+    border-color: var(--accent);
+    border-style: solid;
+    opacity: 0.6;
+}
+.main-card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.main-card::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+.main-card:hover { border-color: var(--border-bright); }
+
+.card-title {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-/* 3. Добавим плавности для самой стрелочки (бонус) */
-summary::after {
+.card-title::before {
+    content: '';
+    display: inline-block;
+    width: 3px; height: 16px;
+    background: var(--accent);
+    box-shadow: var(--glow-sm);
+    flex-shrink: 0;
+}
+
+/* ═══ АККОРДЕОНЫ ═══ */
+.accordion-item {
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+.accordion-item:hover { border-color: rgba(0,200,255,0.3); }
+details[open].accordion-item { border-color: rgba(0,200,255,0.35); }
+
+summary {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-main);
+    background: var(--bg-item);
+    user-select: none;
+    outline: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+summary::-webkit-details-marker { display: none; }
+
+summary::before {
+    content: '▶';
+    font-size: 0.55rem;
+    color: var(--accent);
+    margin-right: 12px;
     transition: transform 0.3s ease;
+    flex-shrink: 0;
 }
 
-/* --- 10. ГЛАВНАЯ СТРАНИЦА (DASHBOARD) --- */
+summary::after {
+    content: attr(data-index);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-left: auto;
+}
+
+details[open] summary {
+    background: var(--bg-item-hover);
+    color: var(--accent);
+}
+
+details[open] summary::before { transform: rotate(90deg); }
+
+summary:focus-visible { box-shadow: inset 0 0 0 1px var(--accent); }
+
+/* ═══ КНОПКИ ═══ */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px;
+    background: rgba(0,200,255,0.02);
+    border-top: 1px solid var(--border);
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+details[open] .button-group { animation: slideDown 0.25s ease; }
+
+.copy-btn {
+    flex: 1 1 calc(50% - 4px);
+    min-width: calc(50% - 4px);
+    padding: 12px 16px;
+    border: none;
+    border-radius: 2px;
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.copy-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transition: left 0.4s ease;
+}
+.copy-btn:hover::before { left: 100%; }
+
+.btn-primary {
+    background: var(--accent);
+    color: #000;
+    box-shadow: 0 0 15px rgba(0,200,255,0.3);
+}
+.btn-primary:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 0 25px rgba(0,200,255,0.5);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-bright);
+}
+.btn-secondary:hover {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.copy-btn.success {
+    background: var(--success) !important;
+    color: #000 !important;
+    border-color: var(--success) !important;
+    box-shadow: 0 0 20px rgba(0,255,157,0.4) !important;
+}
+
+/* ═══ ДАШБОРД — СЕТКА ВИДЖЕТОВ ═══ */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Две колонки одинаковой ширины */
-    gap: 20px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
 .widget-card {
-    background-color: var(--bg-card);
-    border: 1px solid #222;
-    border-radius: 8px;
-    padding: 30px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px;
     text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
+
+.widget-card::before,
+.widget-card::after {
+    content: '';
+    position: absolute;
+    width: 10px; height: 10px;
+    border-color: var(--border-bright);
+    border-style: solid;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.widget-card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.widget-card::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+.widget-card:hover::before,
+.widget-card:hover::after { opacity: 1; }
 
 .widget-card:hover {
-    border-color: var(--accent);
+    border-color: rgba(0,200,255,0.35);
+    background: #0d1620;
     transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(71, 138, 201, 0.15); /* Голубое свечение */
-    background-color: #161b26;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 30px rgba(0,200,255,0.08);
 }
 
+/* Фоновое свечение при наведении */
+.widget-card::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 200%; height: 200%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(0,200,255,0.04) 0%, transparent 60%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+    border: none;
+}
+.widget-card:hover::after { opacity: 1; }
+
 .widget-title {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    color: #fff;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: var(--text-bright);
 }
 
-.widget-title span {
-    color: var(--accent);
-}
+.widget-title span { color: var(--accent); }
 
 .widget-desc {
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
     color: var(--text-muted);
-    font-size: 0.9rem;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
+/* ═══ БЕЙДЖИ ═══ */
 .status-badge {
-    font-size: 0.7rem;
-    padding: 4px 8px;
-    border-radius: 4px;
-    background-color: rgba(46, 204, 113, 0.1);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 1.5px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: rgba(0,255,157,0.08);
     color: var(--success);
-    border: 1px solid var(--success);
+    border: 1px solid rgba(0,255,157,0.3);
 }
 
 .status-badge.restricted {
-    background-color: rgba(224, 131, 0, 0.1);
-    color: var(--justorng);
-    border: 1px solid var(--justorng);
+    background: rgba(255,184,0,0.08);
+    color: var(--warning);
+    border-color: rgba(255,184,0,0.3);
 }
 
+/* ═══ ЧЕЙНДЖЛОГ ═══ */
 .changelog-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    color: var(--text-main);
 }
 
 .changelog-list li {
-    margin-bottom: 12px;
-    padding-left: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--text-main);
+    padding: 10px 0 10px 20px;
     position: relative;
-    font-family: monospace; /* Консольный шрифт для патчноутов */
-    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(0,200,255,0.05);
+    line-height: 1.5;
 }
+.changelog-list li:last-child { border-bottom: none; }
 
 .changelog-list li::before {
     content: '>';
     position: absolute;
     left: 0;
     color: var(--accent);
+    font-weight: 700;
 }
 
-/* Адаптация сетки для телефонов */
-@media (max-width: 768px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr; /* Одна колонка на мобилках */
-    }
-}
-/* --- 11. СТИЛИ ДЛЯ РУКОВОДСТВ (БАГИ, КОД, ЦВЕТА) --- */
+/* ═══ ГАЙДЫ — ЭЛЕМЕНТЫ ═══ */
 .code-block {
-    background-color: #000;
-    color: var(--accent);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    border: 1px solid #222;
     display: inline-block;
-    margin: 5px 0;
+    padding: 2px 8px;
+    background: rgba(0,200,255,0.08);
+    border: 1px solid rgba(0,200,255,0.2);
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    margin: 2px 0;
 }
 
 .warning-box {
-    border-left: 4px solid var(--accent-hover);
-    background: rgba(224, 131, 0, 0.05);
-    padding: 15px;
-    margin: 15px 0;
-    font-size: 0.85rem;
-    color: #ccc;
+    border-left: 3px solid var(--warning);
+    background: rgba(255,184,0,0.05);
+    padding: 14px 16px;
+    margin: 14px 0;
+    font-size: 0.88rem;
+    color: var(--text-main);
+    border-radius: 0 2px 2px 0;
 }
 
 .img-placeholder {
     width: 100%;
-    height: 180px;
-    background: rgba(0, 0, 0, 0.4);
-    border: 2px dashed #333;
-    border-radius: 8px;
+    min-height: 160px;
+    background: rgba(0,200,255,0.03);
+    border: 1px dashed rgba(0,200,255,0.2);
+    border-radius: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-muted);
-    font-size: 0.9rem;
-    margin: 15px 0;
-    text-align: center;
-    padding: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin: 12px 0;
+    overflow: hidden;
 }
+.img-placeholder img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* Сетка для палитры цветов */
+/* ═══ ЦВЕТОВАЯ ПАЛИТРА ═══ */
 .color-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 10px;
-    margin-top: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 8px;
+    margin-top: 12px;
     width: 100%;
 }
 
 .color-btn {
     display: flex;
     align-items: center;
-    gap: 12px;
-    background: #161b26;
-    border: 1px solid #2d3545;
-    padding: 10px;
-    border-radius: 6px;
+    gap: 10px;
+    background: var(--bg-item);
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    border-radius: 2px;
     cursor: pointer;
-    color: #fff;
-    transition: 0.2s;
-    font-size: 0.85rem;
-    font-family: monospace;
+    color: var(--text-main);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
     text-align: left;
+    transition: all 0.2s;
 }
-
-.color-btn:hover {
-    border-color: var(--accent);
-    background: #1f2532;
-}
+.color-btn:hover { border-color: var(--accent); background: var(--bg-item-hover); color: var(--accent); }
 
 .color-swatch {
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 16px; height: 16px;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.1);
+    flex-shrink: 0;
 }
-/* --- СТИЛИ ДЛЯ КОНСТРУКТОРОВ --- */
+
+/* ═══ КОНСТРУКТОР ═══ */
 .constructor-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
-@media (max-width: 768px) {
-    .constructor-grid { grid-template-columns: 1fr; }
-}
-
-.input-group {
-    margin-bottom: 15px;
-}
+.input-group { margin-bottom: 16px; }
 
 .input-group label {
     display: block;
-    font-family: var(--font-heading);
-    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
     color: var(--accent);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 .c-input, .c-select {
     width: 100%;
     padding: 10px 12px;
-    background: #0d1117;
-    border: 1px solid #2d3545;
-    border-radius: 4px;
-    color: #fff;
-    font-family: var(--font-body);
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text-bright);
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
-
 .c-input:focus, .c-select:focus {
     border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(0,200,255,0.1);
 }
+.c-select option { background: #0b1018; }
 
-/* Стильные переключатели (Сегментированные кнопки) */
 .level-selector {
     display: flex;
-    background: #0d1117;
-    border: 1px solid #2d3545;
-    border-radius: 4px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
     overflow: hidden;
+    background: rgba(0,0,0,0.4);
 }
-
-.level-selector input[type="radio"] {
-    display: none; /* Прячем стандартные кружочки радиокнопок */
-}
-
+.level-selector input[type="radio"] { display: none; }
 .level-selector label {
     flex: 1;
     text-align: center;
-    padding: 8px 0;
+    padding: 9px 0;
     color: var(--text-muted);
     cursor: pointer;
-    border-right: 1px solid #2d3545;
+    border-right: 1px solid var(--border);
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    letter-spacing: 1px;
     font-weight: 700;
-    font-family: var(--font-body);
-    transition: all 0.2s ease;
+    transition: all 0.2s;
 }
-
-.level-selector label:last-child {
-    border-right: none;
-}
-
-/* Состояние, когда кнопка нажата */
+.level-selector label:last-child { border-right: none; }
 .level-selector input[type="radio"]:checked + label {
     background: var(--accent);
     color: #000;
+    box-shadow: var(--glow-sm);
 }
 
 .result-box {
-    grid-column: 1 / -1; /* Растягиваем на всю ширину */
-    background: #000;
+    grid-column: 1 / -1;
+    background: rgba(0,0,0,0.6);
     padding: 20px;
-    border: 1px solid var(--accent);
-    border-radius: 6px;
+    border: 1px solid rgba(0,200,255,0.3);
+    border-radius: 3px;
     margin-top: 10px;
+    position: relative;
 }
 
 .result-command {
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-mono);
     color: var(--success);
     word-break: break-all;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    line-height: 1.4;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 14px;
 }
+
+/* ═══ ПОДВАЛ ═══ */
+footer {
+    position: relative;
+    z-index: 1;
+    margin-top: 100px;
+    padding: 40px 24px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.3;
+}
+
+/* ═══ АНИМАЦИИ ═══ */
+@keyframes glitch {
+    0%, 100% { clip-path: none; transform: none; }
+    20% { clip-path: inset(10% 0 80% 0); transform: translateX(-2px); }
+    40% { clip-path: inset(50% 0 30% 0); transform: translateX(2px); }
+    60% { clip-path: inset(70% 0 10% 0); transform: translateX(-1px); }
+}
+
+@keyframes flicker {
+    0%, 95%, 100% { opacity: 1; }
+    96% { opacity: 0.8; }
+    97% { opacity: 1; }
+    98% { opacity: 0.6; }
+    99% { opacity: 1; }
+}
+
+@keyframes pulse-border {
+    0%, 100% { border-color: var(--border); }
+    50% { border-color: rgba(0,200,255,0.4); }
+}
+
+/* ═══ АДАПТИВ ═══ */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 14px 20px;
+        gap: 10px;
+    }
+    nav { flex-wrap: wrap; justify-content: center; height: auto; }
+    nav a { height: 40px; padding: 0 10px; font-size: 0.55rem; }
+
+    h1 { font-size: 2rem; letter-spacing: 3px; }
+    .container { margin: 30px auto; padding: 0 16px; }
+    .main-card { padding: 20px 14px; }
+    .dashboard-grid { grid-template-columns: 1fr; gap: 12px; }
+    .constructor-grid { grid-template-columns: 1fr; }
+    .copy-btn { flex: 0 0 100%; min-width: 100%; }
+    .color-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    summary { padding: 14px 16px; }
+}
+
+/* ═══ СКРОЛЛБАР ═══ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-page); }
+::-webkit-scrollbar-thumb { background: rgba(0,200,255,0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,200,255,0.6); }

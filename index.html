@@ -4,170 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Терминал | Protocol: Revival</title>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="AStyle.css">
-    <style>
-        /* Только для главной: анимированный блок приветствия */
-        .terminal-hero {
-            margin-bottom: 50px;
-        }
-
-        .terminal-label {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        .hero-title-wrap {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 6px;
-        }
-
-        /* Глитч-эффект на h1 */
-        .hero-title-wrap h1 {
-            animation: flicker 8s infinite;
-        }
-
-        .hero-title-wrap::before,
-        .hero-title-wrap::after {
-            content: '[ТЕРМИНАЛ ДОСТУПА]';
-            position: absolute;
-            top: 0; left: 0;
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3.8rem);
-            font-weight: 900;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            width: 100%;
-            opacity: 0;
-            animation: glitch 10s infinite;
-        }
-
-        .hero-title-wrap::before {
-            color: #ff003c;
-            animation-delay: 0.05s;
-        }
-
-        .hero-title-wrap::after {
-            color: var(--accent);
-            animation-delay: 0.1s;
-        }
-
-        /* Строка статуса */
-        .status-line {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin: 28px 0 0;
-            flex-wrap: wrap;
-        }
-
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-        }
-
-        .status-dot {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--success);
-            animation: pulse-dot 2s infinite;
-            flex-shrink: 0;
-        }
-
-        .status-dot.warn { background: var(--warning); }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,157,0.6); }
-            50% { box-shadow: 0 0 0 4px rgba(0,255,157,0); }
-        }
-
-        /* Виджеты с иконками */
-        .widget-icon {
-            font-family: var(--font-mono);
-            font-size: 1.6rem;
-            color: rgba(0,200,255,0.15);
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 4px;
-            transition: color 0.3s;
-        }
-
-        .widget-card:hover .widget-icon {
-            color: rgba(0,200,255,0.35);
-        }
-
-        /* Курсор терминала */
-        .cursor {
-            display: inline-block;
-            width: 2px; height: 1em;
-            background: var(--accent);
-            vertical-align: middle;
-            margin-left: 4px;
-            animation: blink 1.1s step-end infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* Приветственный текст */
-        .welcome-text {
-            font-family: var(--font-mono);
-            font-size: 0.88rem;
-            line-height: 1.8;
-            color: var(--text-muted);
-        }
-
-        .welcome-text .hl { color: var(--accent); }
-        .welcome-text .ok { color: var(--success); }
-
-        /* Разделитель */
-        .section-divider {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin: 40px 0 24px;
-        }
-
-        .section-divider span {
-            font-family: var(--font-display);
-            font-size: 0.6rem;
-            letter-spacing: 4px;
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-
-        .section-divider::before,
-        .section-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-
-        /* Чейнджлог — версионные бейджи */
-        .version-tag {
-            display: inline-block;
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--accent);
-            background: rgba(0,200,255,0.08);
-            border: 1px solid rgba(0,200,255,0.25);
-            padding: 1px 7px;
-            border-radius: 2px;
-            margin-right: 8px;
-        }
-    </style>
 </head>
 <body>
 
@@ -177,95 +15,70 @@
         <a href="./" class="active">Главная</a>
         <a href="cassie.html">C.A.S.S.I.E.</a>
         <a href="cinfo.html">Cinfo</a>
-        <a href="ccards.html">CCards</a>
-        <a href="guides.html">Гайд</a>
+        <a href="ccards.html">CCards</a> 
+        <a href="guides.html">Гайд</a> 
         <a href="constructor.html">Конструктор</a>
     </nav>
 </header>
 
 <div class="container">
+    <h1>[ТЕРМИНАЛ ДОСТУПА]</h1>
+    <div class="instruction">Авторизация пройдена. Добро пожаловать в систему.</div>
 
-    <!-- ── ГЕРОЙ ── -->
-    <div class="terminal-hero">
-        <div class="terminal-label">// SYSTEM BOOT — AUTH LEVEL 4 — ZONE-ALPHA</div>
-        <div class="hero-title-wrap">
-            <h1>[ТЕРМИНАЛ ДОСТУПА]</h1>
-        </div>
-        <div class="status-line">
-            <div class="status-item"><div class="status-dot"></div>СИСТЕМА В СЕТИ</div>
-            <div class="status-item"><div class="status-dot"></div>АВТОРИЗАЦИЯ ПРОЙДЕНА</div>
-            <div class="status-item"><div class="status-dot warn"></div>УРОВЕНЬ УГРОЗЫ: УМЕРЕННЫЙ</div>
-        </div>
-    </div>
-
-    <!-- ── ИНФОРМАЦИОННАЯ КАРТОЧКА ── -->
     <div class="main-card">
-        <div class="card-title">СТАТУС ПРОТОКОЛА</div>
-        <div class="welcome-text">
-            <span class="ok">[ OK ]</span> Загрузка базы данных ивент-мастеров...<br>
-            <span class="ok">[ OK ]</span> Модули <span class="hl">C.A.S.S.I.E.</span> / <span class="hl">CINFO</span> / <span class="hl">CCARDS</span> активированы.<br>
-            <span class="ok">[ OK ]</span> Все конфигурации доступны для копирования.<br>
-            <span class="hl">_ </span>Добро пожаловать, ивент-мастер.<span class="cursor"></span>
-        </div>
+        <div class="card-title" style="color: var(--accent); font-size: 1.4rem;">[СТАТУС: "Protocol: Revival"]</div>
+        <p>Этот сайт был создан с целью помочь вам в проведении ивентов. Все нужные для ивентов конфигурации, логики и команды собраны на одном ресурсе для быстрого доступа.</p>
     </div>
-
-    <!-- ── СЕТКА ВИДЖЕТОВ ── -->
-    <div class="section-divider"><span>МОДУЛИ СИСТЕМЫ</span></div>
 
     <div class="dashboard-grid">
+        
         <a href="cassie.html" class="widget-card">
-            <div class="widget-icon">[♪]</div>
             <div class="widget-title">
                 <span>// C.A.S.S.I.E.</span>
                 <div class="status-badge">ONLINE</div>
             </div>
-            <div class="widget-desc">Центральная система оповещений. Кастомные объявления для любых ситуаций.</div>
+            <div class="widget-desc">Центральная система оповещений. Доступ к кастомным уведомлениям для всех ситуаций.</div>
         </a>
 
         <a href="cinfo.html" class="widget-card">
-            <div class="widget-icon">[☰]</div>
             <div class="widget-title">
                 <span>// CINFO</span>
                 <div class="status-badge">ONLINE</div>
             </div>
-            <div class="widget-desc">Кастомная информация об игроке — роли, звания, уровни допуска.</div>
+            <div class="widget-desc">Кастомная информация об игроке.</div>
         </a>
 
         <a href="ccards.html" class="widget-card">
-            <div class="widget-icon">[▣]</div>
             <div class="widget-title">
                 <span>// CCARDS</span>
                 <div class="status-badge">ONLINE</div>
             </div>
-            <div class="widget-desc">База данных ключ-карт. Конфигурации доступа для каждой фракции.</div>
+            <div class="widget-desc">База данных ключ-карт. Конфигурации доступов для персонала.</div>
         </a>
 
         <a href="guides.html" class="widget-card">
-            <div class="widget-icon">[?]</div>
             <div class="widget-title">
                 <span>// GUIDES</span>
                 <div class="status-badge">ONLINE</div>
             </div>
-            <div class="widget-desc">Полный справочник по командам, тегам и синтаксису для ивент-мастеров.</div>
+            <div class="widget-desc">Инструкции для ивент-мастеров. Руководства по всем нужным аспектам.</div>
         </a>
+
     </div>
 
-    <!-- ── ЧЕЙНДЖЛОГ ── -->
-    <div class="section-divider"><span>ЖУРНАЛ ОБНОВЛЕНИЙ</span></div>
-
     <div class="main-card">
-        <div class="card-title">CHANGELOG</div>
+        <div class="card-title">Журнал обновлений</div>
         <ul class="changelog-list">
-            <li><span class="version-tag">v2.1</span>Интеграция нового дизайна "Deep Space". Добавлена главная страница в формате терминала.</li>
-            <li><span class="version-tag">v2.0</span>Оптимизирована функция копирования конфигов. Добавлена анимация раскрывающихся списков.</li>
-            <li><span class="version-tag">v1.0</span>Запуск базовой версии базы данных — модули C.A.S.S.I.E. и CCards.</li>
+            <li><strong>v2.1</strong> — Интеграция нового дизайна "Deep Space". Добавлена главная страница в формате терминала.</li>
+            <li><strong>v2.0</strong> — Оптимизирована функция копирования конфигов в буфер обмена. Добавлена анимация раскрывающихся списков.</li>
+            <li><strong>v1.0</strong> — Запуск базовой версии базы данных для ивент-мастеров (модули C.A.S.S.I.E. и CCards).</li>
         </ul>
     </div>
 
 </div>
 
 <footer>
-    Protocol: Revival &copy; 2026 &nbsp;|&nbsp; Все права не защищены
+    <p>Protocol: Revival &copy; 2026<br>Все права не защищены</p>
 </footer>
 
 </body>

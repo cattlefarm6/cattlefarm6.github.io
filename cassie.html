@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C.A.S.S.I.E. | Protocol: Revival</title>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="AStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+   <link rel="stylesheet" href="AStyle.css">
+    
 </head>
 <body>
 
@@ -13,10 +15,10 @@
     <div class="logo">Protocol:<strong> Revival</strong></div>
     <nav>
         <a href="./">Главная</a>
-        <a href="cassie.html" class="active">C.A.S.S.I.E.</a>
+        <a href="cassie.html" class = "active">C.A.S.S.I.E.</a>
         <a href="cinfo.html">Cinfo</a>
-        <a href="ccards.html">CCards</a>
-        <a href="guides.html">Гайд</a>
+        <a href="ccards.html">CCards</a> 
+        <a href="guides.html">Гайд</a> 
         <a href="constructor.html">Конструктор</a>
     </nav>
 </header>
@@ -26,16 +28,17 @@
     <div class="instruction">Используйте кнопки внутри списков для копирования конфигураций</div>
 
     <div class="main-card">
-        <div class="card-title">Кастомные уведомления</div>
+        <div class="card-title">Кастомные уведомления </div>
 
         <details class="accordion-item">
             <summary>Служба безопасности</summary>
             <div class="button-group">
                 <button class="copy-btn btn-primary" data-payload="Йоу йоу йоу">Копировать Конфиг</button>
+                
                 <button class="copy-btn btn-secondary" data-payload="CODE_SEC_1">Копировать Конфиг</button>
+
                 <button class="copy-btn btn-primary" data-payload="Йоу йоу йоу">Копировать Конфиг</button>
                 <button class="copy-btn btn-secondary" data-payload="CODE_SEC_1">Копировать Конфиг</button>
-            </div>
         </details>
 
         <details class="accordion-item">
@@ -55,32 +58,40 @@
         </details>
 
     </div>
-</div>
+    
+    </div>
 
 <footer>
-    Protocol: Revival &copy; 2026 &nbsp;|&nbsp; Все права не защищены
+    <p>Protocol: Revival &copy; 2026<br>Все права не защищены</p>
 </footer>
 
 <script>
+    // Оптимизированный JS
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('copy-btn')) {
             const btn = e.target;
+            // Проверка, не нажата ли уже кнопка (чтобы избежать спама кликами)
             if (btn.classList.contains('success')) return;
+
             const textToCopy = btn.getAttribute('data-payload');
             const originalText = btn.innerText;
+
             navigator.clipboard.writeText(textToCopy).then(() => {
                 btn.innerText = 'СКОПИРОВАНО!';
                 btn.classList.add('success');
+                
                 setTimeout(() => {
                     btn.innerText = originalText;
                     btn.classList.remove('success');
                 }, 1500);
-            }).catch(() => {
+            }).catch(err => {
+                console.error('Ошибка копирования: ', err);
                 btn.innerText = 'ОШИБКА!';
                 setTimeout(() => btn.innerText = originalText, 1500);
             });
         }
     });
 </script>
+
 </body>
 </html>

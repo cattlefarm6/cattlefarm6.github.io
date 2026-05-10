@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CCards | Protocol: Revival</title>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="AStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+   <link rel="stylesheet" href="AStyle.css">
+    
 </head>
 <body>
 
@@ -15,8 +17,8 @@
         <a href="./">Главная</a>
         <a href="cassie.html">C.A.S.S.I.E.</a>
         <a href="cinfo.html">Cinfo</a>
-        <a href="ccards.html" class="active">CCards</a>
-        <a href="guides.html">Гайд</a>
+        <a href="ccards.html" class="active">CCards</a> 
+        <a href="guides.html">Гайд</a> 
         <a href="constructor.html">Конструктор</a>
     </nav>
 </header>
@@ -26,16 +28,16 @@
     <div class="instruction">Используйте кнопки внутри списков для копирования конфигураций</div>
 
     <div class="main-card">
-        <div class="card-title">Кастомные ключ-карты</div>
+        <div class="card-title">Кастомные ключ карты</div>
 
         <details class="accordion-item">
             <summary>Служба безопасности</summary>
             <div class="button-group">
                 <button class="copy-btn btn-primary" data-payload="Йоу йоу йоу">Копировать Конфиг</button>
                 <button class="copy-btn btn-secondary" data-payload="CODE_SEC_1">Копировать Конфиг</button>
+
                 <button class="copy-btn btn-primary" data-payload="Йоу йоу йоу">Копировать Конфиг</button>
                 <button class="copy-btn btn-secondary" data-payload="CODE_SEC_1">Копировать Конфиг</button>
-            </div>
         </details>
 
         <details class="accordion-item">
@@ -55,26 +57,84 @@
         </details>
 
     </div>
+   
+        </div>
+    </div>
+    
+    
 </div>
 
 <footer>
-    Protocol: Revival &copy; 2026 &nbsp;|&nbsp; Все права не защищены
+    <p>Protocol: Revival &copy; 2026<br>Все права не защищены</p>
 </footer>
 
 <script>
+    // Оптимизированный JS
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('copy-btn')) {
             const btn = e.target;
+            // Проверка, не нажата ли уже кнопка (чтобы избежать спама кликами)
             if (btn.classList.contains('success')) return;
+
             const textToCopy = btn.getAttribute('data-payload');
             const originalText = btn.innerText;
+
             navigator.clipboard.writeText(textToCopy).then(() => {
                 btn.innerText = 'СКОПИРОВАНО!';
                 btn.classList.add('success');
-                setTimeout(() => { btn.innerText = originalText; btn.classList.remove('success'); }, 1500);
-            }).catch(() => { btn.innerText = 'ОШИБКА!'; setTimeout(() => btn.innerText = originalText, 1500); });
+                
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('success');
+                }, 1500);
+            }).catch(err => {
+                console.error('Ошибка копирования: ', err);
+                btn.innerText = 'ОШИБКА!';
+                setTimeout(() => btn.innerText = originalText, 1500);
+            });
         }
     });
+    // ЛОГИКА КОНСТРУКТОРОВ КАРТ
+    const finalCommandEl = document.getElementById('final-command');
+    const copyBtn = document.getElementById('copy-constructor-btn');
+    
+    // Функция сборки команды
+    function generateCommand() {
+        // Собираем значения из обычных полей
+        const id = document.getElementById('c_id').value || '1';
+        const model = document.getElementById('c_model').value;
+        const invName = document.getElementById('c_invName').value || 'Keycard';
+        const cardText = document.getElementById('c_cardText').value || 'Ключ-карта';
+        const owner = document.getElementById('c_owner').value || 'Никнейм';
+        const circleColor = document.getElementById('c_circleColor').value || 'red';
+        const bgColor = document.getElementById('c_bgColor').value || 'black';
+        const textColor = document.getElementById('c_textColor').value || 'blue';
+        const circleCount = document.getElementById('c_circleCount').value || '1';
+
+        // Собираем значения из стильных радиокнопок
+        const scp = document.querySelector('input[name="c_scp"]:checked').value;
+        const weap = document.querySelector('input[name="c_weap"]:checked').value;
+        const adm = document.querySelector('input[name="c_adm"]:checked').value;
+
+        // Формируем финальную строку
+        const cmd = `ckeycard ${id} ${model} ${invName} ${scp} ${weap} ${adm} ${circleColor} ${bgColor} ${cardText} ${textColor} ${owner} ${circleCount}`;
+        
+        finalCommandEl.innerText = cmd;
+        
+        // ФИКС: Передаем команду в твой универсальный скрипт копирования
+        copyBtn.setAttribute('data-payload', cmd);
+    }
+
+    // Слушаем изменения во всех инпутах конструктора
+    const allInputs = document.querySelectorAll('.c-input, .c-select, input[type="radio"]');
+    allInputs.forEach(input => {
+        input.addEventListener('input', generateCommand);
+        input.addEventListener('change', generateCommand);
+    });
+
+    // Запускаем один раз при загрузке страницы, чтобы кнопка сразу получила данные
+    generateCommand();
 </script>
+
 </body>
 </html>

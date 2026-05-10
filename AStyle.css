@@ -18,8 +18,8 @@
     --border: rgba(0,200,255,0.15);
     --border-bright: rgba(0,200,255,0.5);
     --scanline: rgba(0,200,255,0.03);
-    --font-display: 'Orbitron', monospace;
-    --font-ui: 'Rajdhani', sans-serif;
+    --font-display: 'Montserrat', monospace;
+    --font-ui: 'Montserrat', sans-serif;
     --font-mono: 'Share Tech Mono', monospace;
     --glow: 0 0 20px rgba(0,200,255,0.3), 0 0 60px rgba(0,200,255,0.1);
     --glow-sm: 0 0 8px rgba(0,200,255,0.4);
